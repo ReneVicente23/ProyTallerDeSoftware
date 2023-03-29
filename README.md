@@ -5,7 +5,8 @@
 ### Si se usa un IDE:
 - Instalar Maven si el IDE no lo tuviera. 
 - Actualizar o descargar las dependencias Maven del proyecto (comando: mvn clean)
-- Se debe ejecutar la clase main: Backend Application 
+- Se debe ejecutar:
+ProyTallerDeSotware/backend/src/main/java/bo.edu.ucb.tallerdedesarrollo.backend/BackendApplication 
 
 ### Desde línea de comandos:
 - Instalar Maven
