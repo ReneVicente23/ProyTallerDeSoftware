@@ -1,4 +1,4 @@
-package bo.edu.ucb.tallerdedesarollo.backend;
+package bo.edu.ucb.tallerdedesarollo.backend.DTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,5 +1,7 @@
-package bo.edu.ucb.tallerdedesarollo.backend;
+package bo.edu.ucb.tallerdedesarollo.backend.API;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DAO.CustomerDAO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
