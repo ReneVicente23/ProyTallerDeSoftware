@@ -24,4 +24,16 @@ public class Evento_publicacionAPI {
     }
     //obtiene todos los eventos_publicacion que se tienen
 
+    @GetMapping(path="/", produces = APPLICATION_JSON_VALUE) // necesitamos auth de front
+    public List<Evento_publicacionDTO> findAllSol() {
+        return evento_publicacionBL.getAll();
+    }
+
+    @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
+    public Evento_publicacionDTO create(@RequestBody Evento_publicacionDTO evento_publicacionDTO) {
+        evento_publicacionBL.newEvento_publicacion(evento_publicacionDTO);
+        return evento_publicacionDTO;
+
+    }
+
 }
