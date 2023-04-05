@@ -23,6 +23,17 @@ public class SolicitudEventoAPI {
     public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL) {
         this.solicitudEventoBL = solicitudEventoBL;
     }
+    @GetMapping(path="/test", produces = APPLICATION_JSON_VALUE)
+    public List<SolicitudEventoDTO> findAllSol() {
+        return solicitudEventoBL.getAll();
+    }
+
+    @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
+    public SolicitudEventoDTO create(@RequestBody SolicitudEventoDTO solicitudEventoDTO) {
+        solicitudEventoBL.nuevaSol(solicitudEventoDTO);
+        return solicitudEventoDTO;
+
+    }
 
     
 }
