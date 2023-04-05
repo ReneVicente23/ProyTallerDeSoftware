@@ -27,6 +27,11 @@ public class InteresesBL {
        return this.interesesDAO.findAll();
     }
 
+    public void saveInteres(InteresesDTO interesesDTO){
+        String nombre  = interesesDTO.getNombre_interes();
+        String imagen = interesesDTO.getImagen();
+        this.interesesDAO.saveInteres(nombre,imagen);
+    }
     
 
 

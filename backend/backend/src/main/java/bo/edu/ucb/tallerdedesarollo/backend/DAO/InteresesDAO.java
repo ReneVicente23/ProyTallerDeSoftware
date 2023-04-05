@@ -2,6 +2,8 @@ package bo.edu.ucb.tallerdedesarollo.backend.DAO;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,8 @@ public interface InteresesDAO {
 
     @Select("SELECT interesid, nombre_interes, imagen FROM intereses")
     public List<InteresesDTO> findAll();
+
+    @Insert("INSERT INTO intereses(nombre_interes, imagen) VALUES (#{nombre_interes}, #{imagen})")
+    public void saveInteres(@Param("nombre_interes") String nombre_interes, @Param("imagen") String imagen);
     
 }

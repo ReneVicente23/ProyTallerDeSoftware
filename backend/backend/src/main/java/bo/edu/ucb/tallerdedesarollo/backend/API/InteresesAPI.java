@@ -5,14 +5,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.InteresesBL;
+import bo.edu.ucb.tallerdedesarollo.backend.DAO.InteresesDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -33,6 +38,14 @@ public class InteresesAPI {
     public List<InteresesDTO> getIntereses() {
         return interesesBL.intereses();
     }
+
+    @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
+    public InteresesDTO create(@RequestBody InteresesDTO interes) {
+       interesesBL.saveInteres(interes);
+       return interes;
+         
+    }
+
     
 
     
