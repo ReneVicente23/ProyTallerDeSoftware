@@ -12,6 +12,6 @@ import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
 public interface InteresesDAO {
 
     @Select("SELECT interesid, nombre_interes, imagen FROM intereses")
-    List<InteresesDTO> listadoDeIntereses();
+    public List<InteresesDTO> findAll();
     
 }
