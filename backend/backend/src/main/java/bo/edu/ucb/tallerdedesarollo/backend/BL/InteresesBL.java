@@ -33,7 +33,10 @@ public class InteresesBL {
         this.interesesDAO.saveInteres(nombre,imagen);
     }
     
-
+    public InteresesDTO getInteres(Integer Id) {
+        Integer id= Math.toIntExact(Id);
+        return this.interesesDAO.findInteresId(id);
+    }
 
     
 }

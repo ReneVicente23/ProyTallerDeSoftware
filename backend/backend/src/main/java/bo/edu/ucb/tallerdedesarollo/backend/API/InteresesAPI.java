@@ -16,6 +16,7 @@ import bo.edu.ucb.tallerdedesarollo.backend.DAO.InteresesDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -46,7 +47,10 @@ public class InteresesAPI {
          
     }
 
-    
+    @GetMapping(path ="/{id}")
+    public InteresesDTO getById(@PathVariable Integer id) {
+        return interesesBL.getInteres(id);
+    }
 
     
 }

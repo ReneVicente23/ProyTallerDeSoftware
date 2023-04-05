@@ -18,5 +18,8 @@ public interface InteresesDAO {
 
     @Insert("INSERT INTO intereses(nombre_interes, imagen) VALUES (#{nombre_interes}, #{imagen})")
     public void saveInteres(@Param("nombre_interes") String nombre_interes, @Param("imagen") String imagen);
+
+    @Select("SELECT interesid, nombre_interes, imagen FROM intereses  WHERE interesid = #{idinteres}")
+    public InteresesDTO findInteresId(@Param("idinteres") Integer id);
     
 }
