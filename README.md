@@ -1,6 +1,10 @@
 # ProyTallerDeSoftware
 
+## Se tienen 2 branches main y test2 , puedes cambiar entre estas con el comando "git checkout main/test2", se tiene en main auth y en test2 el API 
+
 ### Para ejecutar el proyecto se requiere el JDK 17 (tutorial: https://youtu.be/e3jYoxel6ms este tambien cubre las Path Variables)
+
+### Se requiere base de datos postgresql (version 14 o 15 se testeo con ambas) (instrucciones para docker en la carpeta BD junto a sql actualizado de la bd y fakedata) bdport: 5432, Nombre de la base de datos: taller, password para postgresql: root
 
 ### Si se usa un IDE:
 - Instalar Maven si el IDE no lo tuviera. 
