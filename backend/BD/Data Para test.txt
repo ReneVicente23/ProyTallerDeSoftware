@@ -1,0 +1,29 @@
+Publico destino: -----------------------------------------------------------------------------------------------------
+
+insert into publico_destino (edad_inicio, edad_limite, tipo)
+values (16,30,'Estudiantes');
+
+Evento_Publicacion_tipo-----------------------------------------------------------------------------------------------------
+
+insert into evento_publicacion_tipo (tipo)
+values ('Evento');
+
+Evento Publicacion-----------------------------------------------------------------------------------------------------
+
+insert into evento_publicacion (titulo, descripcion, id_imagen, lugar, link, evento_publicacion_tipo_id_eptipo)
+values ('test', 'Descripcion test', '13245679', 'Atrio Test', 'www.test.com',1);
+
+Union publico destino con evento publicacion-----------------------------------------------------------------------------------------------------
+
+insert into publico_destino_ep ( evento_publicacion_ep_id, publico_destino_id_pd)
+values (1,1);
+
+Usuario test -----------------------------------------------------------------------------------------------------
+
+insert into usuarios ( googleid, usertype)
+values (123465,1);
+
+Solicitud test -----------------------------------------------------------------------------------------------------
+
+insert into solicitudes (solicitudid, usuarios_userid, descripcion, estado, evento_publicacion_ep_id)
+values (1,1,'Descripcion de solicitud de Test', 1,1);

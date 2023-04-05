@@ -1,0 +1,18 @@
+Creando repo en docker:
+
+docker run --name taller -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres
+
+para ver el codigo de los contenedores: 
+docker ps
+
+Para la bd:
+docker exec -it codigodelcontedor bash
+nota: no es necesario todo el codigo con los 5 primeros caracteres esta bien
+
+Dentro del bash de postgres:
+su - postgres
+psql
+\c template1
+CREATE DATABASE taller;
+\c taller
+copiarquery
