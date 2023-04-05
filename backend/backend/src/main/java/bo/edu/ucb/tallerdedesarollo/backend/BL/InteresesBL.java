@@ -1,4 +1,4 @@
-package bo.edu.ucb.tallerdedesarollo.BL;
+package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
 
 import java.util.List;

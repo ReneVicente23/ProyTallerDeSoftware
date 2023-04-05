@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bo.edu.ucb.tallerdedesarollo.BL.InteresesBL;
+import bo.edu.ucb.tallerdedesarollo.backend.BL.InteresesBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
