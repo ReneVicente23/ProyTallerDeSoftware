@@ -17,7 +17,7 @@ public interface SolicitudEventoDAO {
     public List<SolicitudEventoDTO> findAll();
 
     //Quitar solicitud id en la actualizacion a BD cambio de int a serial
-    @Insert("INSERT INTO solicitudes (solicitudid, usuarios_userid, descripcion, estado, evento_publicacion_ep_id)" +
-            "VALUES (#{id}, #{userid},#{descripcion},#{estado},#{epid})")
-    public void newSol(@Param("id") Integer id, @Param("userid") Integer userId, @Param("descripcion") String descripcion, @Param("estado") Integer estado, @Param("epid") Integer epid);
+    @Insert("INSERT INTO solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id)" +
+            "VALUES ( #{userid},#{descripcion},#{estado},#{epid})")
+    public void newSol(@Param("userid") Integer userId, @Param("descripcion") String descripcion, @Param("estado") Integer estado, @Param("epid") Integer epid);
 }

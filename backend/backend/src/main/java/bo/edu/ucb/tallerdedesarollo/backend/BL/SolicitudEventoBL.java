@@ -22,7 +22,6 @@ public class SolicitudEventoBL {
     }
 
     public void nuevaSol(SolicitudEventoDTO solicitudEventoDTO){
-        Integer test = (int) (Math.random()*100);
-        solicitudEventoDAO.newSol(test,(int)solicitudEventoDTO.getUsuarios_userid(),solicitudEventoDTO.getDescripcion(),(int)solicitudEventoDTO.getEstado(),(int)solicitudEventoDTO.getEvento_publicacion_ep_id());
+        solicitudEventoDAO.newSol((int)solicitudEventoDTO.getUsuarios_userid(),solicitudEventoDTO.getDescripcion(),(int)solicitudEventoDTO.getEstado(),(int)solicitudEventoDTO.getEvento_publicacion_ep_id());
     }
 }
