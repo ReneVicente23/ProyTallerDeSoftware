@@ -9,12 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SolicitudEventoDTO {
-    private long solicitudid;
-    private long usuarios_userid;
-    private String descripcion;
-    private long estado;
+public class Publico_destino_epDTO {
+    private long id_ped;
     private long evento_publicacion_ep_id;
-
-
+    private long publico_destino_id_pd;
 }
