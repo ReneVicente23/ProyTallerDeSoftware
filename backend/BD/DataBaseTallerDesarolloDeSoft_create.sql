@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-05 18:17:12.147
+-- Last modification date: 2023-04-11 23:58:56.792
 
 -- tables
 -- Table: Inscripcion
@@ -14,7 +14,7 @@ CREATE TABLE Inscripcion (
 CREATE TABLE Intereses (
     interesId serial  NOT NULL,
     nombre_interes varchar(50)  NOT NULL,
-    imagene varchar(255)  NOT NULL,
+    imagen varchar(255)  NOT NULL,
     CONSTRAINT Intereses_pk PRIMARY KEY (interesId)
 );
 
@@ -96,21 +96,29 @@ CREATE TABLE paralelo (
     CONSTRAINT paralelo_pk PRIMARY KEY (paraleloId)
 );
 
--- Table: publico_destino
-CREATE TABLE publico_destino (
-    id_pd serial  NOT NULL,
-    edad_inicio int  NOT NULL,
-    edad_limite int  NOT NULL,
-    tipo varchar(50)  NOT NULL,
-    CONSTRAINT publico_destino_pk PRIMARY KEY (id_pd)
-);
-
 -- Table: publico_destino_ep
 CREATE TABLE publico_destino_ep (
     id_ped serial  NOT NULL,
     evento_publicacion_ep_id int  NOT NULL,
-    publico_destino_id_pd int  NOT NULL,
+    tipopublico int  NOT NULL,
+    rangos_edad_id_rangos_edad int  NOT NULL,
+    publico_tipo_id_publico int  NOT NULL,
     CONSTRAINT publico_destino_ep_pk PRIMARY KEY (id_ped)
+);
+
+-- Table: publico_tipo
+CREATE TABLE publico_tipo (
+    id_publico serial  NOT NULL,
+    tipo varchar(50)  NOT NULL,
+    CONSTRAINT publico_tipo_pk PRIMARY KEY (id_publico)
+);
+
+-- Table: rangos_edad
+CREATE TABLE rangos_edad (
+    id_rangos_edad serial  NOT NULL,
+    edad_inicio int  NOT NULL,
+    edad_fin int  NOT NULL,
+    CONSTRAINT rangos_edad_pk PRIMARY KEY (id_rangos_edad)
 );
 
 -- Table: solicitudes
@@ -236,10 +244,18 @@ ALTER TABLE publico_destino_ep ADD CONSTRAINT publico_destino_ep_evento_publicac
     INITIALLY IMMEDIATE
 ;
 
--- Reference: publico_destino_ep_publico_destino (table: publico_destino_ep)
-ALTER TABLE publico_destino_ep ADD CONSTRAINT publico_destino_ep_publico_destino
-    FOREIGN KEY (publico_destino_id_pd)
-    REFERENCES publico_destino (id_pd)  
+-- Reference: publico_destino_ep_publico_tipo (table: publico_destino_ep)
+ALTER TABLE publico_destino_ep ADD CONSTRAINT publico_destino_ep_publico_tipo
+    FOREIGN KEY (publico_tipo_id_publico)
+    REFERENCES publico_tipo (id_publico)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: publico_destino_ep_rangos_edad (table: publico_destino_ep)
+ALTER TABLE publico_destino_ep ADD CONSTRAINT publico_destino_ep_rangos_edad
+    FOREIGN KEY (rangos_edad_id_rangos_edad)
+    REFERENCES rangos_edad (id_rangos_edad)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
