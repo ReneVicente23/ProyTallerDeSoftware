@@ -1,6 +1,8 @@
 package bo.edu.ucb.tallerdedesarollo.backend.API;
 
+import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,20 +21,26 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/solicitud")
 public class SolicitudEventoAPI {
     private SolicitudEventoBL solicitudEventoBL;
+    private Evento_PublicacionBL evento_publicacionBL;
 
-    public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL) {
+    public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL, Evento_PublicacionBL evento_publicacionBL) {
         this.solicitudEventoBL = solicitudEventoBL;
+        this.evento_publicacionBL = evento_publicacionBL;
     }
+
     @GetMapping(path="/test", produces = APPLICATION_JSON_VALUE)
     public List<SolicitudEventoDTO> findAllSol() {
         return solicitudEventoBL.getAll();
     }
 
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-    public SolicitudEventoDTO create(@RequestBody SolicitudEventoDTO solicitudEventoDTO) {
-        solicitudEventoBL.nuevaSol(solicitudEventoDTO);
-        return solicitudEventoDTO;
+    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) {
+        Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
 
+        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
+        solicitudEventoBL.nuevaSol(se);
+        System.out.println(eventoRecepcionDTO.toString());
+        return eventoRecepcionDTO;
     }
 
 
