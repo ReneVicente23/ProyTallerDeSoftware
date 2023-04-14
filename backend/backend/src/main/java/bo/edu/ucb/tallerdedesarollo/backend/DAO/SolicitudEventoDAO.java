@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface SolicitudEventoDAO {
 
-    @Select("SELECT * " +
+    @Select("SELECT usuarios_userid, descripcion, estado, evento_publicacion_ep_id " +
             "FROM solicitudes")
     public List<SolicitudEventoDTO> findAll();
 
