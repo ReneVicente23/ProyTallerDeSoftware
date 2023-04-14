@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.InteresesBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.InteresesDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesSub;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,5 +53,13 @@ public class InteresesAPI {
         return interesesBL.getInteres(id);
     }
 
-    
+    @GetMapping(path = "/mostrar", produces = APPLICATION_JSON_VALUE)
+    public List<InteresesSub> getInteresesMostrar() {
+        return interesesBL.getIntereseWithSub();
+    }
+
+    @GetMapping(path = "/mostrar/{id}", produces = APPLICATION_JSON_VALUE)
+    public InteresesSub getInteresesSubMostrar(@PathVariable Integer id) {
+        return interesesBL.getInteresSub(id);
+    }
 }
