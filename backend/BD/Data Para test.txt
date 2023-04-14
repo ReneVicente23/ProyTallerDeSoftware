@@ -42,8 +42,8 @@ values (123465,1);
 
 Solicitud test -----------------------------------------------------------------------------------------------------
 
-insert into solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id)
-values (1,'Descripcion de solicitud de Test', 1,1);
+insert into solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id,fecha_solicitud,fecha_revisado)
+values (1,'Descripcion de solicitud de Test', 1,1,'2023-04-14 14:11:50','2023-04-14 17:11:50');
 
 Intereses
 test-----------------------------------------------------------------------------------------------------
