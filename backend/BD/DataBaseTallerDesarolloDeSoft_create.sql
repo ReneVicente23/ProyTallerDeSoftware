@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-12 14:02:33.476
+-- Last modification date: 2023-04-14 02:15:27.38
 
 -- tables
 -- Table: Inscripcion
@@ -83,7 +83,7 @@ CREATE TABLE interesesEventos (
 CREATE TABLE interesesUsuario (
     idinterUs serial  NOT NULL,
     usuarios_userId int  NOT NULL,
-    Intereses_interesId int  NOT NULL,
+    sub_intereses_id_subinteres int  NOT NULL,
     CONSTRAINT interesesUsuario_pk PRIMARY KEY (idinterUs)
 );
 
@@ -156,14 +156,6 @@ ALTER TABLE Inscripcion ADD CONSTRAINT Inscripcion_usuarios
     INITIALLY IMMEDIATE
 ;
 
--- Reference: InteresesUsuario_Intereses (table: interesesUsuario)
-ALTER TABLE interesesUsuario ADD CONSTRAINT InteresesUsuario_Intereses
-    FOREIGN KEY (Intereses_interesId)
-    REFERENCES Intereses (interesId)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
 -- Reference: InteresesUsuario_usuarios (table: interesesUsuario)
 ALTER TABLE interesesUsuario ADD CONSTRAINT InteresesUsuario_usuarios
     FOREIGN KEY (usuarios_userId)
@@ -224,6 +216,14 @@ ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_Intereses
 ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_evento_publicacion
     FOREIGN KEY (evento_publicacion_ep_id)
     REFERENCES evento_publicacion (ep_id)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: interesesUsuario_sub_intereses (table: interesesUsuario)
+ALTER TABLE interesesUsuario ADD CONSTRAINT interesesUsuario_sub_intereses
+    FOREIGN KEY (sub_intereses_id_subinteres)
+    REFERENCES sub_intereses (id_subinteres)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;

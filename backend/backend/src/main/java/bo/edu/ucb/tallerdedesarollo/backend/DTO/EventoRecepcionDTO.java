@@ -14,5 +14,7 @@ public class EventoRecepcionDTO {
     private String id_imagen;
     private String lugar;
     private String link;
-    private CategoriaDTO[] categoriaDTOS;
+    //private CategoriaDTO[] categoriaDTOS;
+    private InteresesDTO[] interesesDTOS;
+    private String publico;
 }

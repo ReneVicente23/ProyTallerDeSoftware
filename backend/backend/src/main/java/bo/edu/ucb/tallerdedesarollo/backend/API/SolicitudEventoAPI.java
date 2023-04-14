@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,12 +35,13 @@ public class SolicitudEventoAPI {
     }
 
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) {
+    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO /*, @RequestParam("file")MultipartFile file*/) {
+        //System.out.println(eventoRecepcionDTO.toString());
         Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
 
         SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
         solicitudEventoBL.nuevaSol(se);
-        System.out.println(eventoRecepcionDTO.toString());
+        //System.out.println(eventoRecepcionDTO.toString());
         return eventoRecepcionDTO;
     }
 

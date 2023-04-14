@@ -4,6 +4,7 @@ import bo.edu.ucb.tallerdedesarollo.backend.DAO.Evento_publicacionDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.CategoriaDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,30 @@ public class Evento_PublicacionBL {
     public Integer newEvento (EventoRecepcionDTO eventoRecepcionDTO){
         eventoPublicacionDAO.saveEvento_publicacion(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
         Integer idEvento=eventoPublicacionDAO.findIdByContend(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
-        for (CategoriaDTO cts: eventoRecepcionDTO.getCategoriaDTOS()) {
-            eventoPublicacionDAO.save_interes((int) cts.getInteresID(),idEvento);
+        for (InteresesDTO cts: eventoRecepcionDTO.getInteresesDTOS()) {
+            //System.out.println(cts.toString());
+            eventoPublicacionDAO.save_interes((int) cts.getInteresid(),idEvento);
         }
-        eventoPublicacionDAO.save_publico(idEvento,1,2,1); //llenar con datos de front
+        if(!eventoRecepcionDTO.getPublico().contentEquals("")){
+            String[] publicoaux= eventoRecepcionDTO.getPublico().split("-");
+            System.out.println("Estas Aqui----------------");
+            Integer auxi=2;
+            if(publicoaux[0].contentEquals("Edad")){
+                auxi=1;
+
+                for(int i=0;i<publicoaux.length-1;i++){
+                    eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(publicoaux[i+1]),1);
+                    System.out.println("Edad "+publicoaux[i+1]);
+                }
+            }else{
+                for(int i=0;i<publicoaux.length-1;i++){
+                    eventoPublicacionDAO.save_publico(idEvento,auxi,1,Integer.parseInt(publicoaux[i+1]));
+                }
+            }
+
+        }
+        //System.out.println("publico: "+eventoRecepcionDTO.getPublico());
+        //eventoPublicacionDAO.save_publico(idEvento,1,2,1); //llenar con datos de front
         return idEvento;
     }
 
