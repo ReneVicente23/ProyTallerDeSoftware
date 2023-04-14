@@ -4,6 +4,7 @@ import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,4 +30,9 @@ public interface Evento_publicacionDAO {
             " VALUES (#{eventoID}, #{tipo},#{rangoID},#{tipoPublico})")
     public void save_publico(@Param("eventoID") Integer idEvento,@Param("tipo") Integer tipo,@Param("rangoID") Integer rangoID,@Param("tipoPublico") Integer tipoPublico);
 
+    @Select("SELECT * " +
+            "FROM evento_publicacion WHERE titulo= #{titulo} AND descripcion=#{descripcion} AND id_imagen= #{id_imagen} AND lugar= #{lugar} AND link=#{link} LIMIT 1"  ) // Validacion de usuario necesaria
+    public Evento_publicacionDTO findByContend(@Param("titulo") String titulo, @Param("descripcion") String descripcion, @Param("id_imagen") String id_imagen,@Param("lugar") String lugar,@Param("link") String link,@Param("id_tipo") Integer id_tipo);
+    @Update("UPDATE evento_publicacion SET id_imagen= #{img} WHERE ep_id = #{id}")
+    public void updateimagen(@Param("ID") Integer id,@Param("img") String img);
 }

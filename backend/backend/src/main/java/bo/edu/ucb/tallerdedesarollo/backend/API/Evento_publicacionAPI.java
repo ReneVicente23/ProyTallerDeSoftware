@@ -33,7 +33,6 @@ public class Evento_publicacionAPI {
     public Evento_publicacionDTO create(@RequestBody Evento_publicacionDTO evento_publicacionDTO) {
         evento_publicacionBL.newEvento_publicacion(evento_publicacionDTO);
         return evento_publicacionDTO;
-
     }
 
 }

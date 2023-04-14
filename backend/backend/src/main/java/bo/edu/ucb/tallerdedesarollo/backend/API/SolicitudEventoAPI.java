@@ -3,22 +3,25 @@ package bo.edu.ucb.tallerdedesarollo.backend.API;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/solicitud")
 public class SolicitudEventoAPI {
     private SolicitudEventoBL solicitudEventoBL;
@@ -34,9 +37,9 @@ public class SolicitudEventoAPI {
         return solicitudEventoBL.getAll();
     }
 
+
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO /*, @RequestParam("file")MultipartFile file*/) {
-        //System.out.println(eventoRecepcionDTO.toString());
+    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) throws IOException {
         Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
 
         SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
@@ -45,5 +48,24 @@ public class SolicitudEventoAPI {
         return eventoRecepcionDTO;
     }
 
+    @PostMapping(path = "/image", consumes = MULTIPART_FORM_DATA_VALUE)
+    public Map<String,String> imagen(@RequestParam("file")MultipartFile file) throws IOException {
+        System.out.println(file.getName()+file.getContentType()+"  --  "+file.getOriginalFilename());
+        String fileName = file.getOriginalFilename();
+        String name2= UUID.randomUUID().toString();
+        String path= new File("images\\").getAbsolutePath();
+        System.out.println(path);
+
+        try {
+            //file.transferTo( new File("C:\\Users\\RENE\\Documents\\General\\TallerSoft\\ProyTallerDeSoftware\\backend\\backend\\images\\" + fileName));
+            file.transferTo( new File(path+ "\\" + name2)); //no lo guarda con tipo pero se puede habrir desde el navegador
+        } catch (Exception e) {
+            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        //return ResponseEntity.ok("File uploaded successfully.");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id", name2);
+       return map;
+    }
 
 }

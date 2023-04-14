@@ -1,6 +1,7 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DTO;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor

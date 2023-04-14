@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-14 02:15:27.38
+-- Last modification date: 2023-04-14 20:01:00.416
 
 -- tables
 -- Table: Inscripcion
@@ -41,7 +41,7 @@ CREATE TABLE evento_publicacion (
     ep_id serial  NOT NULL,
     titulo varchar(50)  NOT NULL,
     descripcion varchar(200)  NOT NULL,
-    id_imagen varchar(50)  NOT NULL,
+    id_imagen varchar(200)  NOT NULL,
     lugar varchar(50)  NOT NULL,
     link varchar(50)  NOT NULL,
     evento_publicacion_tipo_id_eptipo int  NOT NULL,
@@ -128,6 +128,8 @@ CREATE TABLE solicitudes (
     descripcion varchar(500)  NOT NULL,
     estado int  NOT NULL,
     evento_publicacion_ep_id int  NOT NULL,
+    fecha_solicitud timestamp  NOT NULL,
+    fecha_revisado timestamp  NOT NULL,
     CONSTRAINT solicitudes_pk PRIMARY KEY (solicitudId)
 );
 
