@@ -9,6 +9,4 @@ public class InteresesDTO {
     private Integer interesid;
     private String nombre_interes;
     private String imagen;
-    
-
 }
