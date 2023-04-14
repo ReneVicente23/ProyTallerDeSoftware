@@ -28,4 +28,5 @@ public interface Evento_publicacionDAO {
     @Insert("INSERT INTO publico_destino_ep (evento_publicacion_ep_id, tipopublico,rangos_edad_id_rangos_edad,publico_tipo_id_publico)" +
             " VALUES (#{eventoID}, #{tipo},#{rangoID},#{tipoPublico})")
     public void save_publico(@Param("eventoID") Integer idEvento,@Param("tipo") Integer tipo,@Param("rangoID") Integer rangoID,@Param("tipoPublico") Integer tipoPublico);
+
 }
