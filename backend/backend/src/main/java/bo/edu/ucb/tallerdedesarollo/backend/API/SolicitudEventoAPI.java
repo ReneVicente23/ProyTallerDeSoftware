@@ -18,7 +18,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/solicitud")
 public class SolicitudEventoAPI {
     private SolicitudEventoBL solicitudEventoBL;
@@ -34,16 +34,28 @@ public class SolicitudEventoAPI {
         return solicitudEventoBL.getAll();
     }
 
-    @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO /*, @RequestParam("file")MultipartFile file*/) {
-        //System.out.println(eventoRecepcionDTO.toString());
-        Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
+//    @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
+//    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO /*, @RequestParam("file")MultipartFile file*/) {
+//        //System.out.println(eventoRecepcionDTO.toString());
+//        Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
+//
+//        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
+//        solicitudEventoBL.nuevaSol(se);
+//        //System.out.println(eventoRecepcionDTO.toString());
+//        return eventoRecepcionDTO;
+//    }
 
-        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
-        solicitudEventoBL.nuevaSol(se);
-        //System.out.println(eventoRecepcionDTO.toString());
-        return eventoRecepcionDTO;
+//prueba
+
+    @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public SolicitudEventoDTO insertSoli(@RequestBody SolicitudEventoDTO solicitudEventoDTO){
+        SolicitudEventoDTO solicitud = solicitudEventoBL.insertSoli(solicitudEventoDTO);
+        return solicitud;
     }
-
+    @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public SolicitudEventoDTO estadoSoli(@PathVariable("id") Integer id, @RequestBody SolicitudEventoDTO solicitudEventoDTO){
+        SolicitudEventoDTO solicitud = solicitudEventoBL.estadoSoli(solicitudEventoDTO, id);
+        return solicitud;
+    }
 
 }

@@ -56,4 +56,11 @@ public class Evento_PublicacionBL {
     public List<Evento_publicacionDTO> getAll(){
         return eventoPublicacionDAO.findAll(); // proporcionar userID Cambiar en union
     }
+
+    //Prueba
+    public Evento_publicacionDTO getEventoById(Integer id){
+        Evento_publicacionDTO evento = eventoPublicacionDAO.getEvento(id);
+        return evento;
+    }
+
 }

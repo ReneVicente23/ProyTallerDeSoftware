@@ -29,4 +29,11 @@ public interface Evento_publicacionDAO {
             " VALUES (#{eventoID}, #{tipo},#{rangoID},#{tipoPublico})")
     public void save_publico(@Param("eventoID") Integer idEvento,@Param("tipo") Integer tipo,@Param("rangoID") Integer rangoID,@Param("tipoPublico") Integer tipoPublico);
 
+    //prueba
+
+    @Select(" SELECT titulo, descripcion, id_imagen, lugar, link FROM evento_publicacion " +
+            " WHERE ep_id = #{id} ")
+    public Evento_publicacionDTO getEvento(@Param("id") Integer id);
+
+
 }

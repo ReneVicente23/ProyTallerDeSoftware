@@ -12,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/eventosol")
 public class Evento_publicacionAPI {
     SolicitudEventoBL solicitudEventoBL;
@@ -35,5 +35,13 @@ public class Evento_publicacionAPI {
         return evento_publicacionDTO;
 
     }
+
+    //Prueba
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public Evento_publicacionDTO getEvento(@PathVariable("id") Integer id){
+        Evento_publicacionDTO evento = evento_publicacionBL.getEventoById(id);
+        return evento;
+    }
+
 
 }
