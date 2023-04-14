@@ -13,10 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.springframework.http.MediaType.*;
 
@@ -37,25 +36,19 @@ public class SolicitudEventoAPI {
         return solicitudEventoBL.getAll();
     }
 
-<<<<<<< HEAD
+
 
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
     public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) throws IOException {
         Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
-=======
-//    @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-//    public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO /*, @RequestParam("file")MultipartFile file*/) {
-//        //System.out.println(eventoRecepcionDTO.toString());
-//        Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
-//
-//        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id);
-//        solicitudEventoBL.nuevaSol(se);
-//        //System.out.println(eventoRecepcionDTO.toString());
-//        return eventoRecepcionDTO;
-//    }
->>>>>>> a1aaf0f35d127e6f4790da538eeeabe01ea2cf5b
-
-//prueba
+       //System.out.println(eventoRecepcionDTO.toString());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id,timestamp,timestamp);
+       //solicitudEventoBL.nuevaSol(se);
+        solicitudEventoBL.insertSoli(se);
+       //System.out.println(eventoRecepcionDTO.toString());
+        return eventoRecepcionDTO;
+ }
 
     @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public SolicitudEventoDTO insertSoli(@RequestBody SolicitudEventoDTO solicitudEventoDTO){
@@ -68,7 +61,6 @@ public class SolicitudEventoAPI {
         return solicitud;
     }
 
-<<<<<<< HEAD
     @PostMapping(path = "/image", consumes = MULTIPART_FORM_DATA_VALUE)
     public Map<String,String> imagen(@RequestParam("file")MultipartFile file) throws IOException {
         System.out.println(file.getName()+file.getContentType()+"  --  "+file.getOriginalFilename());
@@ -88,7 +80,4 @@ public class SolicitudEventoAPI {
         map.put("id", name2);
        return map;
     }
-
-=======
->>>>>>> a1aaf0f35d127e6f4790da538eeeabe01ea2cf5b
 }
