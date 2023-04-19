@@ -37,8 +37,8 @@ values (1,1,2,1);
 
 Usuario test -----------------------------------------------------------------------------------------------------
 
-insert into usuarios ( googleid, usertype)
-values (123465,1);
+insert into usuarios ( googleid, usertype, family_name, given_name, hd, email)
+values (123465,1,'castilla','laura','ucb.edu.bo','laura@gmail.com');
 
 Solicitud test -----------------------------------------------------------------------------------------------------
 
