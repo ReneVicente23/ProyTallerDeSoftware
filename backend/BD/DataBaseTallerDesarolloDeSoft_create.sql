@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-14 20:01:00.416
+-- Last modification date: 2023-04-19 14:15:08.327
 
 -- tables
 -- Table: Inscripcion
@@ -129,7 +129,7 @@ CREATE TABLE solicitudes (
     estado int  NOT NULL,
     evento_publicacion_ep_id int  NOT NULL,
     fecha_solicitud timestamp  NOT NULL,
-    fecha_revisado timestamp  NOT NULL,
+    fecha_revisado timestamp  NULL,
     CONSTRAINT solicitudes_pk PRIMARY KEY (solicitudId)
 );
 
@@ -146,6 +146,10 @@ CREATE TABLE usuarios (
     userId serial  NOT NULL,
     googleId int  NOT NULL,
     usertype int  NOT NULL,
+    family_name varchar(100)  NOT NULL,
+    given_name varchar(100)  NOT NULL,
+    hd varchar(50)  NOT NULL,
+    email varchar(100)  NOT NULL,
     CONSTRAINT usuarios_pk PRIMARY KEY (userId)
 );
 
