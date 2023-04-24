@@ -41,4 +41,26 @@ public interface Evento_publicacionDAO {
             " WHERE ep_id = #{id} ")
     public Evento_publicacionDTO getEvento(@Param("id") Integer id);
 
+    @Select(" SELECT p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
+            " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
+            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+            " WHERE k.googleId = #{user_id} ")
+    public List<Evento_publicacionDTO> getRecomendaciones_V1(@Param("user_id")String user_id); //Retorna las recomendaciones solo por Intereses
+
+    @Select(" SELECT p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
+            " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
+            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+            " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" +
+            " WHERE k.googleId = #{user_id} AND d.publico_tipo_id_publico = (k.usertype + 1)")
+    public List<Evento_publicacionDTO> getRecomendaciones_V2(@Param("user_id")String user_id); //Retorna las recomendaciones por Intereses y tipo
+
+    @Select(" SELECT p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
+            " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
+            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+            " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" +
+            " WHERE k.googleId = #{user_id} AND (d.publico_tipo_id_publico = (k.usertype + 1) OR d.rangos_edad_id_rangos_edad = #{edad})") // verificar como se ingresa la edad
+    public List<Evento_publicacionDTO> getRecomendaciones_V3(@Param("user_id")String user_id, @Param("edad")Integer edad); //Retorna las recomendaciones por Intereses, tipo y edad
 }

@@ -42,5 +42,10 @@ public class Evento_publicacionAPI {
         return evento;
     }
 
+    @GetMapping(path="/rec/{userid}", produces = APPLICATION_JSON_VALUE) // necesitamos auth de front
+    public List<Evento_publicacionDTO> findRecomendaciones(@PathVariable("userid") String googleid) {
+        return evento_publicacionBL.getRecomendaciones_v1(googleid);
+    }
+
 
 }

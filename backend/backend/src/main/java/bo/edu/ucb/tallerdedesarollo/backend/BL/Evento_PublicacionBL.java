@@ -63,4 +63,15 @@ public class Evento_PublicacionBL {
         return evento;
     }
 
+    public List<Evento_publicacionDTO> getRecomendaciones_v1 (String googleid){
+        return eventoPublicacionDAO.getRecomendaciones_V1(googleid);
+    }
+    public List<Evento_publicacionDTO> getRecomendaciones_v2 (String googleid){
+        return eventoPublicacionDAO.getRecomendaciones_V2(googleid);
+    }
+
+    public List<Evento_publicacionDTO> getRecomendaciones_v3 (String googleid, Integer edadID){
+        return eventoPublicacionDAO.getRecomendaciones_V3(googleid,edadID);
+    }
+
 }
