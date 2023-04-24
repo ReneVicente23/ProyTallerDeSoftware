@@ -30,6 +30,8 @@ Evento Publicacion--------------------------------------------------------------
 insert into evento_publicacion (titulo, descripcion, id_imagen, lugar, link, evento_publicacion_tipo_id_eptipo)
 values ('test', 'Descripcion test', '13245679', 'Atrio Test', 'www.test.com',1);
 
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE evento_publicacion
+
 Union publico destino con evento publicacion-----------------------------------------------------------------------------------------------------
 
 insert into publico_destino_ep ( evento_publicacion_ep_id, tipopublico, rangos_edad_id_rangos_edad, publico_tipo_id_publico)
