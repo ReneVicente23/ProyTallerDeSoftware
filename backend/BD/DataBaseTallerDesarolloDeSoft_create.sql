@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-19 14:15:08.327
+-- Last modification date: 2023-04-19 14:16:09.607
 
 -- tables
 -- Table: Inscripcion
