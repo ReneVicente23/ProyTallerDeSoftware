@@ -37,9 +37,9 @@ public class SolicitudEventoBL {
     }
 
     public SolicitudEventoDTO estadoSoli(SolicitudEventoDTO solicitudEventoDTO, Integer id){
-        Long datetime = System.currentTimeMillis();
-        Timestamp timestamp = new Timestamp(datetime);
-        solicitudEventoDTO.setFecha_revisado(timestamp);
+        //Long datetime = System.currentTimeMillis();
+        //Timestamp timestamp = new Timestamp(datetime);
+        //solicitudEventoDTO.setFecha_revisado(timestamp);
         solicitudEventoDAO.estadoSoli(solicitudEventoDTO.getEstado(),solicitudEventoDTO.getFecha_revisado(), id);
         return solicitudEventoDTO;
     }
