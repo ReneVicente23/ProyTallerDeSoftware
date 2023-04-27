@@ -39,8 +39,8 @@ values (1,1,2,1);
 
 Usuario test -----------------------------------------------------------------------------------------------------
 
-insert into usuarios ( googleid, usertype, family_name, given_name, hd, email)
-values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com');
+insert into usuarios ( googleid, usertype, family_name, given_name, hd, email, picture)
+values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com', https://psicoterapeutas.eu/imagenes-psicoterapeutas-eu/tests-objetivos.png);
 
 Solicitud test -----------------------------------------------------------------------------------------------------
 

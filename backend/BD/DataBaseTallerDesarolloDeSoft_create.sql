@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-19 14:16:09.607
+-- Last modification date: 2023-04-27 17:58:21.732
 
 -- tables
 -- Table: Inscripcion
@@ -144,12 +144,13 @@ CREATE TABLE sub_intereses (
 -- Table: usuarios
 CREATE TABLE usuarios (
     userId serial  NOT NULL,
-    googleId int  NOT NULL,
+    googleId varchar(100)  NOT NULL,
     usertype int  NOT NULL,
     family_name varchar(100)  NOT NULL,
     given_name varchar(100)  NOT NULL,
     hd varchar(50)  NOT NULL,
     email varchar(100)  NOT NULL,
+    picture varchar(100)  NOT NULL,
     CONSTRAINT usuarios_pk PRIMARY KEY (userId)
 );
 

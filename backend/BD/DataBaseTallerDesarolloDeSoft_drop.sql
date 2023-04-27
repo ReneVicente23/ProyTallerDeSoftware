@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-25 22:21:19.601
+-- Last modification date: 2023-04-27 17:58:21.732
 
 -- foreign keys
 ALTER TABLE Inscripcion
