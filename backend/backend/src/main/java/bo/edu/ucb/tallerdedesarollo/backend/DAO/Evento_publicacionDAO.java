@@ -41,11 +41,11 @@ public interface Evento_publicacionDAO {
             " WHERE ep_id = #{id} ")
     public Evento_publicacionDTO getEvento(@Param("id") Integer id);
 
-    @Select(" SELECT p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+    @Select(" SELECT p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
             " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
             " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
             " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
-            " WHERE k.googleId = ${user_id} ")
+            " WHERE k.googleId = #{user_id} ")
     public List<Evento_publicacionDTO> getRecomendaciones_V1(@Param("user_id")String user_id); //Retorna las recomendaciones solo por Intereses
 
     @Select(" SELECT p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
