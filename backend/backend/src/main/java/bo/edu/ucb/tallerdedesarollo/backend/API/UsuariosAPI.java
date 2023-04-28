@@ -1,16 +1,17 @@
 package bo.edu.ucb.tallerdedesarollo.backend.API;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.AsignarInteresUsuarioDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.SubInteres;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import java.util.Arrays;
 import java.util.List;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.UsuariosBL;
@@ -41,7 +42,19 @@ public class UsuariosAPI {
        return usuario;
     }
 
-    
+    @PostMapping(path = "/asignar-interes", consumes = APPLICATION_JSON_VALUE)
+    public void asignarInteresUsuario(@RequestBody AsignarInteresUsuarioDTO asignarInteresUsuarioDTO) {
+        usuariosBL.asignarInteresUsuario(asignarInteresUsuarioDTO);
+    }
 
-    
+    @GetMapping("/subintereses/{usuarioId}")
+    public ResponseEntity<List<SubInteres>> obtenerSubInteresesPorUsuarioId(@PathVariable Integer usuarioId) {
+        List<SubInteres> subIntereses = usuariosBL.obtenerSubInteresesPorUsuarioId(usuarioId);
+        return new ResponseEntity<List<SubInteres>>(subIntereses, HttpStatus.OK);
+    }
+
+
+
+
+
 }

@@ -65,6 +65,4 @@ public class InteresesBL {
         newInteres.setSubIntereses(subInter);
         return newInteres;
     }
-
-    
 }
