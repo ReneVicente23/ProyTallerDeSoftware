@@ -36,16 +36,18 @@ Union publico destino con evento publicacion------------------------------------
 
 insert into publico_destino_ep ( evento_publicacion_ep_id, tipopublico, rangos_edad_id_rangos_edad, publico_tipo_id_publico)
 values (1,1,2,1);
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE publico_destino_ep
 
 Usuario test -----------------------------------------------------------------------------------------------------
 
 insert into usuarios ( googleid, usertype, family_name, given_name, hd, email, picture)
-values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com', https://psicoterapeutas.eu/imagenes-psicoterapeutas-eu/tests-objetivos.png);
+values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com', 'https://psicoterapeutas.eu/imagenes-psicoterapeutas-eu/tests-objetivos.png');
 
 Solicitud test -----------------------------------------------------------------------------------------------------
 
 insert into solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id,fecha_solicitud,fecha_revisado)
 values (1,'Descripcion de solicitud de Test', 1,1,'2023-04-14 14:11:50','2023-04-14 17:11:50');
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE solicitudes
 
 Intereses
 test-----------------------------------------------------------------------------------------------------

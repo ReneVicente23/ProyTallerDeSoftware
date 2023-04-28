@@ -1,5 +1,6 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2023-04-27 17:58:21.732
+-- PARA ELIMINAR TABLAS DE LA BASE DE DATOS "taller"
 
 -- foreign keys
 ALTER TABLE Inscripcion
