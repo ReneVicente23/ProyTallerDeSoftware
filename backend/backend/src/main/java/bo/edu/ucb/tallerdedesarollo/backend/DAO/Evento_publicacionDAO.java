@@ -55,6 +55,7 @@ public interface Evento_publicacionDAO {
             " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
             " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
             " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" +
+            " JOIN solicitudes j ON j.evento_publicacion_ep_id = p.ep_id " +
             " WHERE k.googleId = ${user_id} AND d.publico_tipo_id_publico = (k.usertype + 1)" +
             " AND j.fecha_revisado is not null ORDER BY j.fecha_revisado")
     public List<Evento_publicacionDTO> getRecomendaciones_V2(@Param("user_id")String user_id); //Retorna las recomendaciones por Intereses y tipo
@@ -64,6 +65,7 @@ public interface Evento_publicacionDAO {
             " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
             " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
             " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" +
+            " JOIN solicitudes j ON j.evento_publicacion_ep_id = p.ep_id " +
             " WHERE k.googleId = ${user_id} AND (d.publico_tipo_id_publico = (k.usertype + 1) OR d.rangos_edad_id_rangos_edad = #{edad})" +
             " AND j.fecha_revisado is not null ORDER BY j.fecha_revisado") // verificar como se ingresa la edad
     public List<Evento_publicacionDTO> getRecomendaciones_V3(@Param("user_id")String user_id, @Param("edad")Integer edad); //Retorna las recomendaciones por Intereses, tipo y edad
