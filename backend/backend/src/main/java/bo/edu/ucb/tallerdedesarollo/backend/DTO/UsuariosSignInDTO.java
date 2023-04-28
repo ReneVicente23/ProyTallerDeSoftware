@@ -10,5 +10,5 @@ public class UsuariosSignInDTO {
     private String given_name;
     private String hd;
     private String email;
-    
+    private String picture;
 }

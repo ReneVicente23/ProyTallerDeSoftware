@@ -41,6 +41,7 @@ public class SolicitudEventoAPI {
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
     public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) throws IOException {
         Integer id = evento_publicacionBL.newEvento(eventoRecepcionDTO);
+        System.out.println("el id es "+ id);
        //System.out.println(eventoRecepcionDTO.toString());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id,timestamp,timestamp);

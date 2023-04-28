@@ -39,7 +39,6 @@ public class UsuariosAPI {
     public UsuariosSignInDTO create(@RequestBody UsuariosSignInDTO usuario) {
        usuariosBL.saveUsuario(usuario);
        return usuario;
-         
     }
 
     

@@ -32,7 +32,16 @@ public class UsuariosBL {
     }
 
     public UsuariosSignInDTO saveUsuario(UsuariosSignInDTO usuario) {
-        this.usuarioDAO.saveUsuario(usuario.getGoogleid(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail());
+        Boolean registrado = false;
+        List<String> emailsGet = this.usuarioDAO.findAlllEmails();
+        for (String email : emailsGet) {
+            if(usuario.getEmail().equals(email)){
+                registrado = true;
+            }
+        }
+        if (registrado == false) {
+            this.usuarioDAO.saveUsuario(usuario.getGoogleid(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail(), usuario.getPicture());
+        }
         return usuario;
     }
 }
