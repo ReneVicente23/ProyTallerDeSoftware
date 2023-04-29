@@ -44,7 +44,7 @@ public class SolicitudEventoAPI {
         System.out.println("el id es "+ id);
        //System.out.println(eventoRecepcionDTO.toString());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id,timestamp,timestamp);
+        SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,"test",1,id,timestamp,null);
        //solicitudEventoBL.nuevaSol(se);
         solicitudEventoBL.insertSoli(se);
        //System.out.println(eventoRecepcionDTO.toString());
