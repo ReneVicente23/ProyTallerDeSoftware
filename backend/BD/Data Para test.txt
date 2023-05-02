@@ -1,0 +1,80 @@
+Publico destino: -----------------------------------------------------------------------------------------------------
+insert into rangos_edad (edad_inicio, edad_fin)
+values (0,0);
+insert into rangos_edad (edad_inicio, edad_fin)
+values (16,30);
+insert into rangos_edad (edad_inicio, edad_fin)
+values (31,60);
+insert into rangos_edad (edad_inicio, edad_fin)
+values (61,99);
+
+insert into publico_tipo (tipo)
+values ('');
+insert into publico_tipo (tipo)
+values ('Estudiante');
+insert into publico_tipo (tipo)
+values ('Docente');
+insert into publico_tipo (tipo)
+values ('Tercera Edad');
+insert into publico_tipo (tipo)
+values ('Administrativo');
+
+
+Evento_Publicacion_tipo-----------------------------------------------------------------------------------------------------
+
+insert into evento_publicacion_tipo (tipo)
+values ('Evento');
+
+Evento Publicacion-----------------------------------------------------------------------------------------------------
+
+insert into evento_publicacion (titulo, descripcion, id_imagen, lugar, link, evento_publicacion_tipo_id_eptipo)
+values ('test', 'Descripcion test', '13245679', 'Atrio Test', 'www.test.com',1);
+
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE evento_publicacion
+
+Union publico destino con evento publicacion-----------------------------------------------------------------------------------------------------
+
+insert into publico_destino_ep ( evento_publicacion_ep_id, tipopublico, rangos_edad_id_rangos_edad, publico_tipo_id_publico)
+values (1,1,2,1);
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE publico_destino_ep
+
+Usuario test -----------------------------------------------------------------------------------------------------
+
+insert into usuarios ( googleid, usertype, family_name, given_name, hd, email, picture)
+values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com', 'https://psicoterapeutas.eu/imagenes-psicoterapeutas-eu/tests-objetivos.png');
+
+Solicitud test -----------------------------------------------------------------------------------------------------
+
+insert into solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id,fecha_solicitud,fecha_revisado)
+values (1,'Descripcion de solicitud de Test', 1,1,'2023-04-14 14:11:50','2023-04-14 17:11:50');
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE solicitudes
+
+Intereses
+test-----------------------------------------------------------------------------------------------------
+
+insert into Intereses (nombre_interes,imagen) 
+values ('Arte','testImagen1');
+insert into Intereses (nombre_interes,imagen) 
+values ('Cine','testImagen1');
+insert into Intereses (nombre_interes,imagen) 
+values ('Test','testImagen1');
+
+Sub_Intereses----------------------------------------------------------------------------------------------------
+
+insert into sub_intereses (nombre,Intereses_interesId) 
+values ('Pintura',1);
+insert into sub_intereses (nombre,Intereses_interesId) 
+values ('Escultura',1);
+insert into sub_intereses (nombre,Intereses_interesId) 
+values ('Drama',2);
+insert into sub_intereses (nombre,Intereses_interesId) 
+values ('Musical',2);
+insert into sub_intereses (nombre,Intereses_interesId) 
+values ('Test de test',3);
+
+Intereses usuario test ---------------------------------------------------------------
+
+insert into interesesUsuario (usuarios_userId, sub_intereses_id_subinteres)
+values (1,1);
+insert into interesesUsuario (usuarios_userId, sub_intereses_id_subinteres)
+values (1,3);

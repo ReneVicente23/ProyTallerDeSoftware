@@ -5,19 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class SolicitudEventoDTO {
-    private long solicitudid;
-    private long usuarios_userid;
-    private String descripcion;
-    private long estado;
+public class Publico_destino_epDTO {
+    private long id_ped;
     private long evento_publicacion_ep_id;
-    private Timestamp fecha_solicitud;
-    private Timestamp fecha_revisado;
-
+    private long publico_destino_id_pd;
 }

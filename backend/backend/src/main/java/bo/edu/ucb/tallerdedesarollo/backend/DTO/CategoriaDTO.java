@@ -1,5 +1,8 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DTO;
 
+import lombok.ToString;
+
+@ToString
 public class CategoriaDTO {
     private long interesID;
     private String interes_name;

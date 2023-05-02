@@ -1,0 +1,1 @@
+Todos las imagenes llegan aqui guardar nombre en bd
