@@ -4,6 +4,13 @@ import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 import static org.springframework.http.MediaType.*;
 
@@ -67,6 +79,7 @@ public class SolicitudEventoAPI {
         System.out.println(file.getName()+file.getContentType()+"  --  "+file.getOriginalFilename());
         String fileName = file.getOriginalFilename();
         String name2= UUID.randomUUID().toString();
+        name2=name2+file.getOriginalFilename();
         String path= new File("images\\").getAbsolutePath();
         System.out.println(path);
 
@@ -80,5 +93,19 @@ public class SolicitudEventoAPI {
         HashMap<String, String> map = new HashMap<>();
         map.put("id", name2);
        return map;
+    }
+
+    @GetMapping(path="/image/{imagename}")
+    public  ResponseEntity<Resource> findImage(@PathVariable("imagename") String id) throws IOException {
+        String path= new File("images\\").getAbsolutePath();
+        //File archivo = new File(path+"\\"+id);
+        //System.out.println(archivo.getPath());
+        //System.out.println(archivo.getName());
+        Path root = Paths.get("./images");
+        Path file = root.resolve(id);
+        Resource resource = new UrlResource(file.toUri());
+
+        return  ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
     }
 }
