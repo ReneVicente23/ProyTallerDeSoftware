@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-27 17:58:21.732
+-- Last modification date: 2023-05-09 19:44:50.37
 
 -- tables
 -- Table: Inscripcion
@@ -150,7 +150,10 @@ CREATE TABLE usuarios (
     given_name varchar(100)  NOT NULL,
     hd varchar(50)  NOT NULL,
     email varchar(100)  NOT NULL,
-    picture varchar(100)  NOT NULL,
+    picture varchar(250)  NOT NULL,
+    nickname varchar(200)  NULL,
+    birthday timestamp  NULL,
+    career varchar(100)  NULL,
     CONSTRAINT usuarios_pk PRIMARY KEY (userId)
 );
 
