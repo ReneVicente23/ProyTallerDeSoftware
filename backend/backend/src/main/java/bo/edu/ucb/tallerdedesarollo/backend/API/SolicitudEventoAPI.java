@@ -48,7 +48,10 @@ public class SolicitudEventoAPI {
         return solicitudEventoBL.getAll();
     }
 
-
+    @GetMapping(path="/{tipoSolicitud}", produces = APPLICATION_JSON_VALUE)
+    public List<SolicitudEventoDTO> findAllAccepted(@PathVariable("tipoSolicitud") String solicitud) {
+        return solicitudEventoBL.getAllAccepted(solicitud);
+    }
 
     @PostMapping(path = "/new", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
     public EventoRecepcionDTO create(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) throws IOException {
@@ -61,7 +64,7 @@ public class SolicitudEventoAPI {
         solicitudEventoBL.insertSoli(se);
        //System.out.println(eventoRecepcionDTO.toString());
         return eventoRecepcionDTO;
- }
+    }
 
     @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public SolicitudEventoDTO insertSoli(@RequestBody SolicitudEventoDTO solicitudEventoDTO){

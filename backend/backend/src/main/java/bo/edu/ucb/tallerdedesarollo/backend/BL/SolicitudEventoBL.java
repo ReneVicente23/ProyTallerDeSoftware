@@ -22,6 +22,20 @@ public class SolicitudEventoBL {
         return solicitudEventoDAO.findAll();
     }
 
+    public List<SolicitudEventoDTO> getAllAccepted(String tipo){
+
+        if (tipo.equals("aceptadas")) {
+            return solicitudEventoDAO.findAllAccepted(1);
+        }else{
+            if (tipo.equals("rechazadas")) {
+                return solicitudEventoDAO.findAllAccepted(0);
+            }else{
+                return null;
+            }
+        }
+
+    }
+
     public void nuevaSol(SolicitudEventoDTO solicitudEventoDTO){
         solicitudEventoDAO.newSol((int)solicitudEventoDTO.getUsuarios_userid(),solicitudEventoDTO.getDescripcion(),(int)solicitudEventoDTO.getEstado(),(int)solicitudEventoDTO.getEvento_publicacion_ep_id());
     }
@@ -43,5 +57,7 @@ public class SolicitudEventoBL {
         solicitudEventoDAO.estadoSoli(solicitudEventoDTO.getEstado(),solicitudEventoDTO.getFecha_revisado(), id);
         return solicitudEventoDTO;
     }
+
+
 
 }

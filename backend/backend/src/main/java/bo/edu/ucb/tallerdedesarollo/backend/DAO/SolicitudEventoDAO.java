@@ -18,6 +18,11 @@ public interface SolicitudEventoDAO {
             " FROM solicitudes ")
     public List<SolicitudEventoDTO> findAll();
 
+    //EndPoint de filtrado de solicitudes aceptadas y rechazadas
+    @Select(" SELECT solicitudid, usuarios_userid, descripcion, estado, evento_publicacion_ep_id ,fecha_solicitud, fecha_revisado " +
+            " FROM solicitudes WHERE estado = #{status};")
+    public List<SolicitudEventoDTO> findAllAccepted(@Param("status") Integer status);
+
     //Quitar solicitud id en la actualizacion a BD cambio de int a serial
     @Insert("INSERT INTO solicitudes (usuarios_userid, descripcion, estado, evento_publicacion_ep_id)" +
             "VALUES ( #{userid},#{descripcion},#{estado},#{epid})")
