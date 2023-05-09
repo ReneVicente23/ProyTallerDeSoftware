@@ -29,5 +29,12 @@ public interface UsuarioDAO {
     @Insert("INSERT INTO usuarios(googleid, usertype, family_name, given_name, hd, email, picture) VALUES (#{googleid}, #{usertype}, #{family_name}, #{given_name}, #{hd}, #{email}, #{picture})")
     public void saveUsuario(@Param("googleid") Integer googleid, @Param("usertype") Integer usertype,@Param("family_name") String family_name, @Param("given_name") String given_name, @Param("hd") String hd, @Param("email") String email, @Param("picture") String picture);
 
+    //User Profile
+    @Update("UPDATE usuarios SET nickname = #{nickname}, birthdate = #{date}, career = #{career} WHERE googleid = #{googleid}")
+    public void updateUserProfile(@Param("nickname")String nick, @Param("date")Timestamp date, @Param("career")String career, @Param("nickname")String googleid);
+
+    @Select("SELECT (nickname,birthdate,career) FROM  usuarios WHERE googleid = #{googleid}")
+    public UserProfileDTO getUserProfile(@Param("googleid")String googleid);
+    //-----------------------------------------------------------------------------------------
 
 }
