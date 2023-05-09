@@ -13,6 +13,9 @@ public class UsuariosDTO {
     private Integer userId;
     private Integer googleId;
     private Integer usertype;
+    //private String nickname;
+    //private String date;
+    //private String career;
 
     
 }
