@@ -66,7 +66,11 @@ public class UsuariosBL {
 
 
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
+        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),userProfileDTO.getBirthdate(),userProfileDTO.getCareer(),userid);
+    }
 
+    public UserProfileDTO getUserProfile(String userid){
+        return usuarioDAO.getUserProfile(userid);
     }
 
 
