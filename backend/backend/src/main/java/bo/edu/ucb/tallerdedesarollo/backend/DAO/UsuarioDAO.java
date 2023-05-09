@@ -1,10 +1,13 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DAO;
 
+import java.sql.Timestamp;
 import java.util.List;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.UserProfileDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesUsuarioDTO;
@@ -25,4 +28,6 @@ public interface UsuarioDAO {
     
     @Insert("INSERT INTO usuarios(googleid, usertype, family_name, given_name, hd, email, picture) VALUES (#{googleid}, #{usertype}, #{family_name}, #{given_name}, #{hd}, #{email}, #{picture})")
     public void saveUsuario(@Param("googleid") Integer googleid, @Param("usertype") Integer usertype,@Param("family_name") String family_name, @Param("given_name") String given_name, @Param("hd") String hd, @Param("email") String email, @Param("picture") String picture);
+
+
 }

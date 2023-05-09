@@ -65,6 +65,10 @@ public class UsuariosBL {
     }
 
 
+    public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
+
+    }
+
 
 
 }

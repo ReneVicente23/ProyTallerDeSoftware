@@ -1,7 +1,6 @@
 package bo.edu.ucb.tallerdedesarollo.backend.API;
 
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.AsignarInteresUsuarioDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.SubInteres;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.UsuariosBL;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.UsuariosDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.UsuariosSignInDTO;
 
 @RestController()
 @CrossOrigin(origins = "*")
@@ -53,6 +50,10 @@ public class UsuariosAPI {
         return new ResponseEntity<List<SubInteres>>(subIntereses, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/profile", consumes = APPLICATION_JSON_VALUE)
+    public void userporfile(@RequestBody UserProfileDTO userProfileDTO) {
+        //usuariosBL.asignarInteresUsuario(asignarInteresUsuarioDTO);
+    }
 
 
 
