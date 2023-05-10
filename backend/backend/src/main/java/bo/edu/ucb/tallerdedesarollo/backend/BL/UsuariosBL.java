@@ -31,6 +31,10 @@ public class UsuariosBL {
         return this.usuarioDAO.findAll();
     }
 
+    public UsuariosDTO getUsuario(Integer id) {
+        return this.usuarioDAO.findUsuario(id);
+    }
+    
     public InteresesUsuarioDTO saveInteresesUsuario(Integer usuario_id, Integer subInteres_id) {
         return this.usuarioDAO.saveInteresesUsuario(usuario_id, subInteres_id);
     }

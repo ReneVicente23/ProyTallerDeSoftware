@@ -20,6 +20,9 @@ public interface UsuarioDAO {
     @Select("SELECT * FROM usuarios")
     public List<UsuariosDTO> findAll();
 
+    @Select("SELECT * FROM usuarios WHERE userid = #{usuario_id}")
+    public UsuariosDTO findUsuario(@Param("usuario_id") Integer id);
+
     @Select("SELECT email FROM usuarios")
     public List<String> findAlllEmails();
 
