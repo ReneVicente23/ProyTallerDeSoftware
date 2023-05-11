@@ -1,6 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-27 17:58:21.732
--- PARA ELIMINAR TABLAS DE LA BASE DE DATOS "taller"
+-- Last modification date: 2023-05-11 00:24:22.044
 
 -- foreign keys
 ALTER TABLE Inscripcion
@@ -8,6 +7,9 @@ ALTER TABLE Inscripcion
 
 ALTER TABLE interesesUsuario
     DROP CONSTRAINT InteresesUsuario_usuarios;
+
+ALTER TABLE comentario
+    DROP CONSTRAINT comentario_solicitudes;
 
 ALTER TABLE evento_publicacion
     DROP CONSTRAINT evento_publicacion_evento_publicacion_tipo;
@@ -63,6 +65,8 @@ DROP TABLE Inscripcion;
 DROP TABLE Intereses;
 
 DROP TABLE audiencias;
+
+DROP TABLE comentario;
 
 DROP TABLE cursos;
 

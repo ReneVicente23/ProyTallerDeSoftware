@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-09 19:44:50.37
+-- Last modification date: 2023-05-11 00:24:22.044
 
 -- tables
 -- Table: Inscripcion
@@ -22,6 +22,14 @@ CREATE TABLE Intereses (
 CREATE TABLE audiencias (
     audienciasId int  NOT NULL,
     CONSTRAINT audiencias_pk PRIMARY KEY (audienciasId)
+);
+
+-- Table: comentario
+CREATE TABLE comentario (
+    id_comentario int  NOT NULL,
+    comentario varchar(500)  NOT NULL,
+    solicitudes_solicitudId int  NOT NULL,
+    CONSTRAINT comentario_pk PRIMARY KEY (id_comentario)
 );
 
 -- Table: cursos
@@ -170,6 +178,14 @@ ALTER TABLE Inscripcion ADD CONSTRAINT Inscripcion_usuarios
 ALTER TABLE interesesUsuario ADD CONSTRAINT InteresesUsuario_usuarios
     FOREIGN KEY (usuarios_userId)
     REFERENCES usuarios (userId)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: comentario_solicitudes (table: comentario)
+ALTER TABLE comentario ADD CONSTRAINT comentario_solicitudes
+    FOREIGN KEY (solicitudes_solicitudId)
+    REFERENCES solicitudes (solicitudId)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
