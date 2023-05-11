@@ -15,7 +15,7 @@ import java.util.List;
 public interface SolicitudEventoDAO {
 
     @Select(" SELECT solicitudid, usuarios_userid, descripcion, estado, evento_publicacion_ep_id ,fecha_solicitud, fecha_revisado " +
-            " FROM solicitudes ")
+            " FROM solicitudes ORDER BY fecha_solicitud DESC, fecha_revisado DESC ")
     public List<SolicitudEventoDTO> findAll();
 
     //EndPoint de filtrado de solicitudes aceptadas y rechazadas

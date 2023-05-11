@@ -55,13 +55,6 @@ public class UsuariosAPI {
         usuariosBL.modUserProfile(userProfileDTO, googleId);
     }
 
-    /*
-    @PostMapping(path = "/profile", consumes = APPLICATION_JSON_VALUE)
-    public void userporfile(@RequestBody UserProfileDTO userProfileDTO) {
-        //usuariosBL.asignarInteresUsuario(asignarInteresUsuarioDTO);
-    }
-    */
-
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
     public UsuariosDTO getUsuarios(@PathVariable Integer id) {
         return usuariosBL.getUsuario(id);
