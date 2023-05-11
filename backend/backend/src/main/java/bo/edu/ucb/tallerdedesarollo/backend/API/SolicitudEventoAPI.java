@@ -111,4 +111,12 @@ public class SolicitudEventoAPI {
         return  ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
     }
+
+    @GetMapping(path="/image2/{imagename}")
+    public  Map<String,String> findImage2(@PathVariable("imagename") String id) throws IOException {
+        String path= new File("images\\").getAbsolutePath();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("path", path+"\\"+id);
+        return map;
+    }
 }
