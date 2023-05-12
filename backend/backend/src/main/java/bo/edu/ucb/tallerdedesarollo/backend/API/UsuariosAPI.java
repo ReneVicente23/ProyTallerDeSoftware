@@ -56,11 +56,9 @@ public class UsuariosAPI {
     }
 
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public UsuariosDTO getUsuarios(@PathVariable Integer id) {
-        return usuariosBL.getUsuario(id);
+    public UserProfileDTO getUsuarios(@PathVariable String id) {
+        //return usuariosBL.getUsuario(id);
+        return usuariosBL.getUserProfile(id);
     }
-
-
-
 
 }

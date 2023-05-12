@@ -10,6 +10,14 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserProfileDTO {
+    private Integer userId;
+    private Integer googleId;
+    private Integer usertype;
+    private String family_name;
+    private String given_name;
+    private String hd;
+    private String email;
+    private String picture;
     private String nickname;
     private Timestamp birthdate;
     private String career;
