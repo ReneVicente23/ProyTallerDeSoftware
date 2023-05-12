@@ -39,5 +39,8 @@ public interface UsuarioDAO {
     @Select("SELECT * FROM  usuarios WHERE googleid = #{googleid}")
     public UserProfileDTO getUserProfile(@Param("googleid")String googleid);
     //-----------------------------------------------------------------------------------------
+    @Select("SELECT userid FROM  usuarios WHERE googleid = #{googleid}")
+    public Integer getUserid(@Param("googleid")String googleid);
+
 
 }

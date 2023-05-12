@@ -54,7 +54,7 @@ public class UsuariosBL {
     }
 
     public void asignarInteresUsuario(AsignarInteresUsuarioDTO asignarInteresUsuarioDTO) {
-        Integer usuarioId = asignarInteresUsuarioDTO.getUsuarioId();
+        Integer usuarioId = usuarioDAO.getUserid(asignarInteresUsuarioDTO.getUsuarioId());
         List<Integer> subInteresIds = asignarInteresUsuarioDTO.getSubInteresId();
         for (Integer subInteresId : subInteresIds) {
             InteresesUsuarioDTO interesesUsuarioDTO = new InteresesUsuarioDTO();
@@ -64,8 +64,9 @@ public class UsuariosBL {
         }
     }
 
-    public List<SubInteres> obtenerSubInteresesPorUsuarioId(Integer usuarioId) {
-        return interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(usuarioId);
+    public List<SubInteres> obtenerSubInteresesPorUsuarioId(String usuarioId) {
+        Integer id=usuarioDAO.getUserid(usuarioId);
+        return interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(id);
     }
 
 

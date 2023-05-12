@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AsignarInteresUsuarioDTO {
-    private Integer usuarioId;
+    private String usuarioId;
     private List<Integer> subInteresId;
 
     public List<Integer> getSubInteresIds() {

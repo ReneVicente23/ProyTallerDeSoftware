@@ -88,7 +88,7 @@ public class SolicitudEventoAPI {
 
         try {
             //file.transferTo( new File("C:\\Users\\RENE\\Documents\\General\\TallerSoft\\ProyTallerDeSoftware\\backend\\backend\\images\\" + fileName));
-            file.transferTo( new File(path+ "\\" + name2)); //no lo guarda con tipo pero se puede habrir desde el navegador
+            file.transferTo( new File(path+ "\\" + name2)); //se puede habrir desde el navegador
         } catch (Exception e) {
             //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -119,4 +119,5 @@ public class SolicitudEventoAPI {
         map.put("path", path+"\\"+id);
         return map;
     }
+
 }

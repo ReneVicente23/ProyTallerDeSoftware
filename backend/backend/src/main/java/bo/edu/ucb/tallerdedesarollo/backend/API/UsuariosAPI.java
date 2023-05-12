@@ -45,7 +45,7 @@ public class UsuariosAPI {
     }
 
     @GetMapping("/subintereses/{usuarioId}")
-    public ResponseEntity<List<SubInteres>> obtenerSubInteresesPorUsuarioId(@PathVariable Integer usuarioId) {
+    public ResponseEntity<List<SubInteres>> obtenerSubInteresesPorUsuarioId(@PathVariable String usuarioId) {
         List<SubInteres> subIntereses = usuariosBL.obtenerSubInteresesPorUsuarioId(usuarioId);
         return new ResponseEntity<List<SubInteres>>(subIntereses, HttpStatus.OK);
     }
