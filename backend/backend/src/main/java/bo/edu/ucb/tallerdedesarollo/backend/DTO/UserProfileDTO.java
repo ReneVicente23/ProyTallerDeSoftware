@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
@@ -19,6 +20,6 @@ public class UserProfileDTO {
     private String email;
     private String picture;
     private String nickname;
-    private Timestamp birthdate;
+    private Date birthdate;
     private String career;
 }

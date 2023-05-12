@@ -1,5 +1,6 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,7 +72,8 @@ public class UsuariosBL {
 
 
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
-        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),userProfileDTO.getBirthdate(),userProfileDTO.getCareer(),userid);
+        Timestamp ts= new Timestamp(userProfileDTO.getBirthdate().getTime());
+        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(),userid);
     }
 
     public UserProfileDTO getUserProfile(String userid){

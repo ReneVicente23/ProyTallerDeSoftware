@@ -34,7 +34,7 @@ public interface UsuarioDAO {
 
     //User Profile
     @Update("UPDATE usuarios SET nickname = #{nickname}, birthday = #{date}, career = #{career} WHERE googleid = #{googleid}")
-    public void updateUserProfile(@Param("nickname")String nick, @Param("date")Timestamp date, @Param("career")String career, @Param("nickname")String googleid);
+    public void updateUserProfile(@Param("nickname")String nick, @Param("date")Timestamp date, @Param("career")String career, @Param("googleid")String googleid);
 
     @Select("SELECT * FROM  usuarios WHERE googleid = #{googleid}")
     public UserProfileDTO getUserProfile(@Param("googleid")String googleid);
