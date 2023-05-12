@@ -134,6 +134,12 @@ public class SolicitudEventoAPI {
         return solicitudEventoBL.getSolicitudById(id);
     }
     
+    @GetMapping(path="/image3/{imagename}")
+    public  String findImage3(@PathVariable("imagename") String id) throws IOException {
+        String path= new File("images\\").getAbsolutePath();
+        System.out.println(path+"\\"+id);
+        return path+"\\"+id;
+    }
 
     @GetMapping(path="/publico/{solicitud_id}")
     public  Map<String,String> findpublico(@PathVariable("solicitud_id") Integer id){
