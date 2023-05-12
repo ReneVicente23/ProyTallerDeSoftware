@@ -20,6 +20,6 @@ public class UserProfileDTO {
     private String email;
     private String picture;
     private String nickname;
-    private Date birthdate;
+    private Date birthday;
     private String career;
 }
