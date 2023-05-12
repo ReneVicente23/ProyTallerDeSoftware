@@ -2,6 +2,7 @@ package bo.edu.ucb.tallerdedesarollo.backend.API;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import org.apache.commons.io.IOUtils;
@@ -30,6 +31,8 @@ import java.util.*;
 import java.util.List;
 
 import static org.springframework.http.MediaType.*;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -77,6 +80,12 @@ public class SolicitudEventoAPI {
         return solicitud;
     }
 
+    // @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    // public SolicitudEventoDTO reachzarSolicitud(@PathVariable("id") Integer id, @RequestBody ComentarioDTO comentario){
+    //     SolicitudEventoDTO solicitud = solicitudEventoBL.rechazarSolicitud(id, comentario);
+    //     return solicitud;
+    // }
+
     @PostMapping(path = "/image", consumes = MULTIPART_FORM_DATA_VALUE)
     public Map<String,String> imagen(@RequestParam("file")MultipartFile file) throws IOException {
         System.out.println(file.getName()+file.getContentType()+"  --  "+file.getOriginalFilename());
@@ -119,6 +128,12 @@ public class SolicitudEventoAPI {
         map.put("path", path+"\\"+id);
         return map;
     }
+
+    @GetMapping(path = "/{id}")
+    public SolicitudEventoDTO getSoliById(@PathVariable Integer id) {
+        return solicitudEventoBL.getSolicitudById(id);
+    }
+    
 
     @GetMapping(path="/publico/{solicitud_id}")
     public  Map<String,String> findpublico(@PathVariable("solicitud_id") Integer id){

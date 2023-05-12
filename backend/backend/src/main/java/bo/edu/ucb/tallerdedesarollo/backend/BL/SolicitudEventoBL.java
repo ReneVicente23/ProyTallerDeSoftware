@@ -1,6 +1,8 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DAO.ComentariosDao;
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.SolicitudEventoDAO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_edadDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_tipoDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
@@ -13,11 +15,13 @@ import java.util.List;
 @Service
 public class SolicitudEventoBL {
     private SolicitudEventoDAO solicitudEventoDAO;
+    private ComentariosDao comentariosDao;
 
+    
     @Autowired
-
-    public SolicitudEventoBL(SolicitudEventoDAO solicitudEventoDAO) {
+    public SolicitudEventoBL(SolicitudEventoDAO solicitudEventoDAO, ComentariosDao comentariosDao) {
         this.solicitudEventoDAO = solicitudEventoDAO;
+        this.comentariosDao = comentariosDao;
     }
 
     public List<SolicitudEventoDTO> getAll(){
@@ -58,6 +62,19 @@ public class SolicitudEventoBL {
         solicitudEventoDTO.setFecha_revisado(timestamp);
         solicitudEventoDAO.estadoSoli(solicitudEventoDTO.getEstado(),solicitudEventoDTO.getFecha_revisado(), id);
         return solicitudEventoDTO;
+    }
+
+    // public SolicitudEventoDTO rechazarSolicitud(Integer id, ComentarioDTO comentario) {
+    //     SolicitudEventoDTO solicitud = solicitudEventoDAO.findAllById(id);
+    //     Long datetime = System.currentTimeMillis();
+    //     Timestamp timestamp = new Timestamp(datetime);
+    //     solicitudEventoDAO.estadoSoli(2, timestamp, id);
+    //     comentariosDao.insertComentarioSolicitud(comentario.getComentario(), id);
+    //     return solicitud;
+    // }
+
+    public SolicitudEventoDTO getSolicitudById(Integer id) {
+        return solicitudEventoDAO.findAllById(id);
     }
 
     public String getPublico(Integer solicitud_id){
