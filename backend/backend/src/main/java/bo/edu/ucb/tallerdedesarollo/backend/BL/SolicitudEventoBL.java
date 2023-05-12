@@ -1,6 +1,8 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.SolicitudEventoDAO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_edadDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_tipoDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +60,29 @@ public class SolicitudEventoBL {
         return solicitudEventoDTO;
     }
 
+    public String getPublico(Integer solicitud_id){
+        List<Publico_edadDTO> edad;
+        List<Publico_tipoDTO> tipo;
+        String res="";
+        try {
+            edad= solicitudEventoDAO.findpublicedad(solicitud_id);
+            if(!edad.isEmpty()){
+                res="Edades: ";
+                for (Publico_edadDTO edades: edad) {
+                    res=res+edades.getEdad_inicio()+" - "+edades.getEdad_fin() + " ";
+                }
+            }
+            tipo= solicitudEventoDAO.findpublic(solicitud_id);
+            if(!tipo.isEmpty()){
+                res="Tipos: ";
+                for (Publico_tipoDTO tipos: tipo) {
+                    res=res+tipos.getTipo()+"  ";
+                }
+            }
+        }catch (Exception e){
 
+        }
+        return res;
+    }
 
 }

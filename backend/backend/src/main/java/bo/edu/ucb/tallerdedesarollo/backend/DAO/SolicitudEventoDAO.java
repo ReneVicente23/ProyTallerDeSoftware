@@ -1,5 +1,7 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DAO;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_edadDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_tipoDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 
 import org.apache.ibatis.annotations.Insert;
@@ -36,4 +38,14 @@ public interface SolicitudEventoDAO {
     @Update(" UPDATE solicitudes SET estado = #{estado}, fecha_revisado = #{fecha_revisado} " +
             " WHERE solicitudid = #{id}; ")
     public void estadoSoli(@Param("estado")long estado, @Param("fecha_revisado") Timestamp fecha, @Param("id") Integer id);
+
+    @Select(" SELECT * FROM publico_tipo p" +
+            " JOIN publico_destino_ep e ON p.id_publico = e.publico_tipo_id_publico " +
+            " WHERE evento_publicacion_ep_id = #{id_sol} AND p.id_publico <> 1")
+    public List<Publico_tipoDTO> findpublic(@Param("id_sol") Integer id_solicitud);
+
+    @Select(" SELECT * FROM rangos_edad p" +
+            " JOIN publico_destino_ep e ON p.id_rangos_edad = e.rangos_edad_id_rangos_edad " +
+            " WHERE evento_publicacion_ep_id = #{id_sol} AND p.id_rangos_edad <> 1")
+    public List<Publico_edadDTO> findpublicedad(@Param("id_sol") Integer id_solicitud);
 }

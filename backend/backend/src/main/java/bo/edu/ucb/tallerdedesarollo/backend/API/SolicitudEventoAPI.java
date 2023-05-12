@@ -120,4 +120,12 @@ public class SolicitudEventoAPI {
         return map;
     }
 
+    @GetMapping(path="/publico/{solicitud_id}")
+    public  Map<String,String> findpublico(@PathVariable("solicitud_id") Integer id){
+        String data= solicitudEventoBL.getPublico(id);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("public", data);
+        return map;
+    }
+
 }
