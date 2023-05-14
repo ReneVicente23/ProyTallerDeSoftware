@@ -91,7 +91,7 @@ public class SolicitudEventoBL {
             }
             tipo= solicitudEventoDAO.findpublic(solicitud_id);
             if(!tipo.isEmpty()){
-                res="Tipos: ";
+                res=res+" Tipos: ";
                 for (Publico_tipoDTO tipos: tipo) {
                     res=res+tipos.getTipo()+"  ";
                 }

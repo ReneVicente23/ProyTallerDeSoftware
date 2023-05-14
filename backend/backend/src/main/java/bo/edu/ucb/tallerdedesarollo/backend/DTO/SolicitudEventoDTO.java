@@ -1,9 +1,6 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -11,6 +8,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class SolicitudEventoDTO {
     private long solicitudid;
     private long usuarios_userid;

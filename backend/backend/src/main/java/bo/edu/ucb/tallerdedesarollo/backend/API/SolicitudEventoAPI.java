@@ -5,6 +5,7 @@ import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoWPublicoDTO;
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -49,6 +50,18 @@ public class SolicitudEventoAPI {
     @GetMapping(path="/test", produces = APPLICATION_JSON_VALUE)
     public List<SolicitudEventoDTO> findAllSol() {
         return solicitudEventoBL.getAll();
+    }
+
+    @GetMapping(path="/solpublico", produces = APPLICATION_JSON_VALUE)
+    public List<SolicitudEventoWPublicoDTO> findAllSolConPublico() {
+        List<SolicitudEventoWPublicoDTO> res = new ArrayList<SolicitudEventoWPublicoDTO>();
+        List<SolicitudEventoDTO> base= solicitudEventoBL.getAll();
+        for (SolicitudEventoDTO lp: base) {
+            SolicitudEventoWPublicoDTO sp = new SolicitudEventoWPublicoDTO(lp.getSolicitudid(), lp.getUsuarios_userid(), lp.getDescripcion(), lp.getEstado(), lp.getEvento_publicacion_ep_id(),lp.getFecha_solicitud(),lp.getFecha_revisado() ,solicitudEventoBL.getPublico((int) lp.getEvento_publicacion_ep_id()));
+            System.out.println(sp.toString());
+            res.add(sp);
+        }
+        return res;
     }
 
     @GetMapping(path="/{tipoSolicitud}", produces = APPLICATION_JSON_VALUE)
