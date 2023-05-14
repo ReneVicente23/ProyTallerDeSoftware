@@ -53,13 +53,19 @@ public class SolicitudEventoAPI {
     }
 
     @GetMapping(path="/solpublico", produces = APPLICATION_JSON_VALUE)
-    public List<SolicitudEventoWPublicoDTO> findAllSolConPublico() {
+    public List<SolicitudEventoWPublicoDTO> findAllSolConPublico( @RequestParam(value = "status", defaultValue = "1", required = false) int status) {
         List<SolicitudEventoWPublicoDTO> res = new ArrayList<SolicitudEventoWPublicoDTO>();
         List<SolicitudEventoDTO> base= solicitudEventoBL.getAll();
         for (SolicitudEventoDTO lp: base) {
             SolicitudEventoWPublicoDTO sp = new SolicitudEventoWPublicoDTO(lp.getSolicitudid(), lp.getUsuarios_userid(), lp.getDescripcion(), lp.getEstado(), lp.getEvento_publicacion_ep_id(),lp.getFecha_solicitud(),lp.getFecha_revisado() ,solicitudEventoBL.getPublico((int) lp.getEvento_publicacion_ep_id()));
             System.out.println(sp.toString());
-            res.add(sp);
+            if(status==5){
+                res.add(sp);
+            }else{
+                if(lp.getEstado()==status){
+                    res.add(sp);
+                }
+            }
         }
         return res;
     }
