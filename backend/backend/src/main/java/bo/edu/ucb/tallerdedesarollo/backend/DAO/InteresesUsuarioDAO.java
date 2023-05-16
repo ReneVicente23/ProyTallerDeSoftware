@@ -18,8 +18,8 @@ public interface InteresesUsuarioDAO {
     @Select("SELECT s.id_subinteres, s.nombre FROM sub_intereses s JOIN interesesusuario i ON s.id_subinteres = i.sub_intereses_id_subinteres WHERE i.usuarios_userid = #{usuarioId}")
     List<SubInteres> obtenerSubInteresesPorUsuarioId(Integer usuarioId);
 
-    @Delete("DELETE FROM interesesusuario WHERE #{Id}= usuarios_userId AND #{sid} = sub_intereses_id_subinteres ")
-    public void delSubInteres(@Param("Id") Integer id, @Param("SID") Integer sid);
+    @Delete("DELETE FROM interesesusuario WHERE usuarios_userId = #{Id} ")
+    public void delSubInteres(@Param("Id") Integer id);
 
 
 }

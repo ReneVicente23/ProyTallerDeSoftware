@@ -56,26 +56,14 @@ public class UsuariosBL {
 
     public void asignarInteresUsuario(AsignarInteresUsuarioDTO asignarInteresUsuarioDTO) {
         Integer usuarioId = usuarioDAO.getUserid(asignarInteresUsuarioDTO.getUsuarioId());
+        interesesUsuarioDAO.delSubInteres(usuarioId);
         List<Integer> subInteresIds = asignarInteresUsuarioDTO.getSubInteresId();
-        //-------
-        List<SubInteres> srt = interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(usuarioId);
-        //-------
         for (Integer subInteresId : subInteresIds) {
-            for (SubInteres st : srt) {
-                if(st.getId_subinteres()!=subInteresId){
-                    InteresesUsuarioDTO interesesUsuarioDTO = new InteresesUsuarioDTO();
-                    interesesUsuarioDTO.setUsuarios_userId(usuarioId);
-                    interesesUsuarioDTO.setSub_intereses_id_subinteres(subInteresId);
-                    this.interesesUsuarioDAO.asignarInteresUsuario(interesesUsuarioDTO.getUsuarios_userId(), interesesUsuarioDTO.getSub_intereses_id_subinteres());
-                }else {
-                    interesesUsuarioDAO.delSubInteres(usuarioId,st.getId_subinteres());
-                }
-            }
-            /*
+
             InteresesUsuarioDTO interesesUsuarioDTO = new InteresesUsuarioDTO();
             interesesUsuarioDTO.setUsuarios_userId(usuarioId);
             interesesUsuarioDTO.setSub_intereses_id_subinteres(subInteresId);
-            this.interesesUsuarioDAO.asignarInteresUsuario(interesesUsuarioDTO.getUsuarios_userId(), interesesUsuarioDTO.getSub_intereses_id_subinteres()); */
+            this.interesesUsuarioDAO.asignarInteresUsuario(interesesUsuarioDTO.getUsuarios_userId(), interesesUsuarioDTO.getSub_intereses_id_subinteres());
         }
     }
 
