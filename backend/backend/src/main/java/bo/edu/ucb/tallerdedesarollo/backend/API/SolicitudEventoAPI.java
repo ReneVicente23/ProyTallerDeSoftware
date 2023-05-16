@@ -58,7 +58,7 @@ public class SolicitudEventoAPI {
         List<SolicitudEventoDTO> base= solicitudEventoBL.getAll();
         for (SolicitudEventoDTO lp: base) {
             SolicitudEventoWPublicoDTO sp = new SolicitudEventoWPublicoDTO(lp.getSolicitudid(), lp.getUsuarios_userid(), lp.getDescripcion(), lp.getEstado(), lp.getEvento_publicacion_ep_id(),lp.getFecha_solicitud(),lp.getFecha_revisado() ,solicitudEventoBL.getPublico((int) lp.getEvento_publicacion_ep_id()));
-            System.out.println(sp.toString());
+            //System.out.println(sp.toString());
             if(status==5){
                 res.add(sp);
             }else{
@@ -135,7 +135,6 @@ public class SolicitudEventoAPI {
         Path root = Paths.get("./images");
         Path file = root.resolve(id);
         Resource resource = new UrlResource(file.toUri());
-
         return  ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
     }
@@ -167,5 +166,4 @@ public class SolicitudEventoAPI {
         map.put("public", data);
         return map;
     }
-
 }
