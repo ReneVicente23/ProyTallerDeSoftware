@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-11 00:24:22.044
+-- Last modification date: 2023-05-12 02:45:04.669
 
 -- tables
 -- Table: Inscripcion
@@ -26,7 +26,7 @@ CREATE TABLE audiencias (
 
 -- Table: comentario
 CREATE TABLE comentario (
-    id_comentario int  NOT NULL,
+    id_comentario serial  NOT NULL,
     comentario varchar(500)  NOT NULL,
     solicitudes_solicitudId int  NOT NULL,
     CONSTRAINT comentario_pk PRIMARY KEY (id_comentario)

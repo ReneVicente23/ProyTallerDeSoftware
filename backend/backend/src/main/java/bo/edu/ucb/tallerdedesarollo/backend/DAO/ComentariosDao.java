@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ComentariosDao {
     
-    @Insert("INSERT INTO comentario(comentario, solicitudes_solicitudid) VALUES (null, #{comentario}, #{solicitudes_solicitudid})")
+    @Insert("INSERT INTO comentario(comentario, solicitudes_solicitudid) VALUES (#{comentario}, #{solicitudes_solicitudid})")
     public void insertComentarioSolicitud(@Param("comentario") String comentario, @Param("solicitudes_solicitudid") Integer solicitudId);
 }

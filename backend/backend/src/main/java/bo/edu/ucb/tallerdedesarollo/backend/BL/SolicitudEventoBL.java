@@ -102,4 +102,9 @@ public class SolicitudEventoBL {
         return res;
     }
 
+    public ComentarioDTO insetComentario (Integer user_id, ComentarioDTO comentarioDTO){
+        comentariosDao.insertComentarioSolicitud(comentarioDTO.getComentario(),user_id);
+      return comentarioDTO;
+    };
+
 }

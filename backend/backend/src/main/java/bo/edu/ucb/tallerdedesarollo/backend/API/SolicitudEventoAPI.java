@@ -166,4 +166,9 @@ public class SolicitudEventoAPI {
         map.put("public", data);
         return map;
     }
+
+    @PostMapping(path = "/comentario/{solicitud_id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ComentarioDTO insertComentario(@PathVariable("solicitud_id") Integer id, @RequestBody ComentarioDTO comentarioDTO){
+        return solicitudEventoBL.insetComentario(id, comentarioDTO);
+    }
 }
