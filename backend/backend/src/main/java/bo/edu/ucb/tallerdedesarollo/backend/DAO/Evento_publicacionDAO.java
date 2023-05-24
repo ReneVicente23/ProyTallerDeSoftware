@@ -69,4 +69,5 @@ public interface Evento_publicacionDAO {
             " WHERE k.googleId = #{user_id} AND (d.publico_tipo_id_publico = (k.usertype + 1) OR d.rangos_edad_id_rangos_edad = #{edad})" +
             " AND j.fecha_revisado is not null ORDER BY j.fecha_revisado") // verificar como se ingresa la edad
     public List<Evento_publicacionDTO> getRecomendaciones_V3(@Param("user_id")String user_id, @Param("edad")Integer edad); //Retorna las recomendaciones por Intereses, tipo y edad
+
 }

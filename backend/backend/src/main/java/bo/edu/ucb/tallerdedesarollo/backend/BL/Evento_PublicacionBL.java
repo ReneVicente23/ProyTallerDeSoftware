@@ -74,4 +74,6 @@ public class Evento_PublicacionBL {
         return eventoPublicacionDAO.getRecomendaciones_V3(googleid,edadID);
     }
 
+    
+
 }

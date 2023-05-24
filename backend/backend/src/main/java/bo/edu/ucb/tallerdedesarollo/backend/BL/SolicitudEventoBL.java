@@ -29,14 +29,21 @@ public class SolicitudEventoBL {
     }
 
     public List<SolicitudEventoDTO> getAllAccepted(String tipo){
-
         if (tipo.equals("aceptadas")) {
             return solicitudEventoDAO.findAllAccepted(1);
         }else{
             if (tipo.equals("rechazadas")) {
-                return solicitudEventoDAO.findAllAccepted(0);
+                return solicitudEventoDAO.findAllAccepted(2);
             }else{
-                return null;
+                if(tipo.equals("pendientes")){
+                    return solicitudEventoDAO.findAllAccepted(0);
+                }else{
+                    if (tipo.equals("modificacion")) {
+                        return solicitudEventoDAO.findAllAccepted(3);
+                    }else{
+                        return null;
+                    }
+                }
             }
         }
 

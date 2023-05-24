@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Evento_publicacionDTO {
-    private long ep_id;
+    private Integer ep_id;
     private String titulo;
     private String descripcion;
     private String id_imagen;

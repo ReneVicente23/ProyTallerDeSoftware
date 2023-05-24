@@ -70,7 +70,7 @@ public class SolicitudEventoAPI {
         return res;
     }
 
-    @GetMapping(path="/{tipoSolicitud}", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(path="/tipo/{tipoSolicitud}", produces = APPLICATION_JSON_VALUE)
     public List<SolicitudEventoDTO> findAllAccepted(@PathVariable("tipoSolicitud") String solicitud) {
         return solicitudEventoBL.getAllAccepted(solicitud);
     }
