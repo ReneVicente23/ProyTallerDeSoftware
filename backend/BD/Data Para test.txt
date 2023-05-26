@@ -19,6 +19,8 @@ values ('Tercera Edad');
 insert into publico_tipo (tipo)
 values ('Administrativo');
 
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE publico_destino
+
 
 Evento_Publicacion_tipo-----------------------------------------------------------------------------------------------------
 
@@ -43,6 +45,8 @@ Usuario test -------------------------------------------------------------------
 
 insert into usuarios ( googleid, usertype, family_name, given_name, hd, email, picture)
 values ('123465',1,'castilla','laura','ucb.edu.bo','laura@gmail.com', 'https://psicoterapeutas.eu/imagenes-psicoterapeutas-eu/tests-objetivos.png');
+
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE usuarios
 
 Solicitud test -----------------------------------------------------------------------------------------------------
 
@@ -80,3 +84,8 @@ insert into interesesUsuario (usuarios_userId, sub_intereses_id_subinteres)
 values (1,1);
 insert into interesesUsuario (usuarios_userId, sub_intereses_id_subinteres)
 values (1,3);
+
+Intereses y eventos---------------------------------------------------------------------
+INGRESAR AL ARCHIVO FAKE DATA Y COPIAR SQL DE interesesEeventos
+
+
