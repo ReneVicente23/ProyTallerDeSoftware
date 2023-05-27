@@ -1,10 +1,7 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.Evento_publicacionDAO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.CategoriaDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +23,9 @@ public class Evento_PublicacionBL {
     public Integer newEvento (EventoRecepcionDTO eventoRecepcionDTO){
         eventoPublicacionDAO.saveEvento_publicacion(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
         Integer idEvento=eventoPublicacionDAO.findIdByContend(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
-        for (InteresesDTO cts: eventoRecepcionDTO.getInteresesDTOS()) {
+        for (SubInteresesDTO cts: eventoRecepcionDTO.getInteresesDTOS()) {
             //System.out.println(cts.toString());
-            eventoPublicacionDAO.save_interes((int) cts.getInteresid(),idEvento);
+            eventoPublicacionDAO.save_interes((int) cts.getId_subinteres(),idEvento);
         }
         if(!eventoRecepcionDTO.getPublico().contentEquals("")){
             String[] publicoaux= eventoRecepcionDTO.getPublico().split("-");

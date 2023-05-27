@@ -22,7 +22,7 @@ public interface Evento_publicacionDAO {
     @Select("SELECT ep_id " +
             "FROM evento_publicacion WHERE titulo= #{titulo} AND descripcion=#{descripcion} AND id_imagen= #{id_imagen} AND lugar= #{lugar} AND link=#{link} LIMIT 1"  ) // Validacion de usuario necesaria
     public Integer findIdByContend(@Param("titulo") String titulo, @Param("descripcion") String descripcion, @Param("id_imagen") String id_imagen,@Param("lugar") String lugar,@Param("link") String link,@Param("id_tipo") Integer id_tipo);
-    @Insert("INSERT INTO interesesEventos (Intereses_interesId, evento_publicacion_ep_id)" +
+    @Insert("INSERT INTO interesesEventos ("/*Intereses_interesId*/+"sub_intereses_id_subinteres , evento_publicacion_ep_id)" +
             " VALUES (#{interesID}, #{eventoID})")
     public void save_interes(@Param("interesID") Integer idInteres, @Param("eventoID") Integer idEvento);
 

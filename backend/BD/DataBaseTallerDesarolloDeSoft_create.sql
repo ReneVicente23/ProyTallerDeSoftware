@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-12 02:45:04.669
+-- Last modification date: 2023-05-27 21:10:23.386
 
 -- tables
 -- Table: Inscripcion
@@ -82,8 +82,8 @@ CREATE TABLE interesesCursos (
 -- Table: interesesEventos
 CREATE TABLE interesesEventos (
     idineven serial  NOT NULL,
-    Intereses_interesId int  NOT NULL,
     evento_publicacion_ep_id int  NOT NULL,
+    sub_intereses_id_subinteres int  NOT NULL,
     CONSTRAINT interesesEventos_pk PRIMARY KEY (idineven)
 );
 
@@ -230,18 +230,18 @@ ALTER TABLE interesesCursos ADD CONSTRAINT interesesCursos_Intereses
     INITIALLY IMMEDIATE
 ;
 
--- Reference: interesesEventos_Intereses (table: interesesEventos)
-ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_Intereses
-    FOREIGN KEY (Intereses_interesId)
-    REFERENCES Intereses (interesId)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
 -- Reference: interesesEventos_evento_publicacion (table: interesesEventos)
 ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_evento_publicacion
     FOREIGN KEY (evento_publicacion_ep_id)
     REFERENCES evento_publicacion (ep_id)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: interesesEventos_sub_intereses (table: interesesEventos)
+ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_sub_intereses
+    FOREIGN KEY (sub_intereses_id_subinteres)
+    REFERENCES sub_intereses (id_subinteres)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
