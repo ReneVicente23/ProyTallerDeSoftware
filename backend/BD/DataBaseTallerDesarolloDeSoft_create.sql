@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-29 22:25:00.263
+-- Last modification date: 2023-05-29 22:44:27.189
 
 -- tables
 -- Table: Inscripcion
@@ -27,7 +27,7 @@ CREATE TABLE audiencias (
 -- Table: carrera
 CREATE TABLE carrera (
     id_carrera serial  NOT NULL,
-    carrera int  NOT NULL,
+    carrera varchar(50)  NOT NULL,
     CONSTRAINT carrera_pk PRIMARY KEY (id_carrera)
 );
 
