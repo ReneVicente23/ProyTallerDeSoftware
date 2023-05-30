@@ -61,4 +61,9 @@ public class UsuariosAPI {
         return usuariosBL.getUserProfile(id);
     }
 
+    @GetMapping(path = "/carrer", produces = APPLICATION_JSON_VALUE)
+    public List<String> getCarrera() {
+        return usuariosBL.getCarrera();
+    }
+
 }

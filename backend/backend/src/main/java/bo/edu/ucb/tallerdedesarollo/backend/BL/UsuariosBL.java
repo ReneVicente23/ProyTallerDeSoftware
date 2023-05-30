@@ -71,15 +71,18 @@ public class UsuariosBL {
         Integer id=usuarioDAO.getUserid(usuarioId);
         return interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(id);
     }
-
-
+    
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
         Timestamp ts= new Timestamp(userProfileDTO.getBirthday().getTime()+90000000);
-        System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
-        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(),userid);
+        //System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
+        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(), userProfileDTO.getUsertype(), userid);
     }
 
     public UserProfileDTO getUserProfile(String userid){
         return usuarioDAO.getUserProfile(userid);
+    }
+
+    public List<String> getCarrera(){
+        return usuarioDAO.getCarreras();
     }
 }

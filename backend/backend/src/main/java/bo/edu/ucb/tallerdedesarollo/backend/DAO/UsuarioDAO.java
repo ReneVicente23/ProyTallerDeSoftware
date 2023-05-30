@@ -33,8 +33,8 @@ public interface UsuarioDAO {
     public void saveUsuario(@Param("sub") String sub, @Param("usertype") Integer usertype,@Param("family_name") String family_name, @Param("given_name") String given_name, @Param("hd") String hd, @Param("email") String email, @Param("picture") String picture);
 
     //User Profile
-    @Update("UPDATE usuarios SET nickname = #{nickname}, birthday = #{date}, career = #{career} WHERE googleid = #{googleid}")
-    public void updateUserProfile(@Param("nickname")String nick, @Param("date")Timestamp date, @Param("career")String career, @Param("googleid")String googleid);
+    @Update("UPDATE usuarios SET nickname = #{nickname}, birthday = #{date}, career = #{career}, usertype = #{usertype}  WHERE googleid = #{googleid}")
+    public void updateUserProfile(@Param("nickname")String nick, @Param("date")Timestamp date, @Param("career")String career, @Param("usertype") Integer usertype, @Param("googleid")String googleid);
 
     @Select("SELECT * FROM  usuarios WHERE googleid = #{googleid}")
     public UserProfileDTO getUserProfile(@Param("googleid")String googleid);
@@ -42,5 +42,7 @@ public interface UsuarioDAO {
     @Select("SELECT userid FROM  usuarios WHERE googleid = #{googleid}")
     public Integer getUserid(@Param("googleid")String googleid);
 
-
+    //Lista de carreras
+    @Select("SELECT carrera FROM carrera")
+    public List<String> getCarreras();
 }
