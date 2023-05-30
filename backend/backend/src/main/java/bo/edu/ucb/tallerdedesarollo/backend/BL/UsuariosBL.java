@@ -82,4 +82,8 @@ public class UsuariosBL {
     public UserProfileDTO getUserProfile(String userid){
         return usuarioDAO.getUserProfile(userid);
     }
+
+    public List<String> getCarrera(){
+        return usuarioDAO.getCarreras();
+    }
 }
