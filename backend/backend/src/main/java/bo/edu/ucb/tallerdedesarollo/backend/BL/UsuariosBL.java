@@ -76,7 +76,7 @@ public class UsuariosBL {
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
         Timestamp ts= new Timestamp(userProfileDTO.getBirthday().getTime()+90000000);
         System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
-        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(),userid);
+        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(),0,userid);
     }
 
     public UserProfileDTO getUserProfile(String userid){
