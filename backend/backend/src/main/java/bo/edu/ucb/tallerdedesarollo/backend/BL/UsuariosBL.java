@@ -49,7 +49,7 @@ public class UsuariosBL {
             }
         }
         if (registrado == false) {
-            this.usuarioDAO.saveUsuario(usuario.getGoogleid(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail(), usuario.getPicture());
+            this.usuarioDAO.saveUsuario(usuario.getSub(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail(), usuario.getPicture());
         }
         return usuario;
     }

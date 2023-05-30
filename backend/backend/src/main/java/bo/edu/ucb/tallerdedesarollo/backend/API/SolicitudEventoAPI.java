@@ -53,7 +53,7 @@ public class SolicitudEventoAPI {
     }
 
     @GetMapping(path="/solpublico", produces = APPLICATION_JSON_VALUE)
-    public List<SolicitudEventoWPublicoDTO> findAllSolConPublico( @RequestParam(value = "status", defaultValue = "1", required = false) int status) {
+    public List<SolicitudEventoWPublicoDTO> findAllSolConPublico( @RequestParam(value = "status", defaultValue = "5", required = false) int status) {
         List<SolicitudEventoWPublicoDTO> res = new ArrayList<SolicitudEventoWPublicoDTO>();
         List<SolicitudEventoDTO> base= solicitudEventoBL.getAll();
         for (SolicitudEventoDTO lp: base) {
