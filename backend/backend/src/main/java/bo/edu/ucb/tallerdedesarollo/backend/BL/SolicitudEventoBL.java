@@ -1,11 +1,9 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.ComentariosDao;
+import bo.edu.ucb.tallerdedesarollo.backend.DAO.Evento_publicacionDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.SolicitudEventoDAO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_edadDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_tipoDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +14,16 @@ import java.util.List;
 public class SolicitudEventoBL {
     private SolicitudEventoDAO solicitudEventoDAO;
     private ComentariosDao comentariosDao;
+    private EmailServiceImpl emailService;
+    private Evento_publicacionDAO eventoPublicacionDAO;
 
     
     @Autowired
-    public SolicitudEventoBL(SolicitudEventoDAO solicitudEventoDAO, ComentariosDao comentariosDao) {
+    public SolicitudEventoBL(SolicitudEventoDAO solicitudEventoDAO, ComentariosDao comentariosDao, EmailServiceImpl emailService, Evento_publicacionDAO eventoPublicacionDAO) {
         this.solicitudEventoDAO = solicitudEventoDAO;
         this.comentariosDao = comentariosDao;
+        this.emailService = emailService;
+        this.eventoPublicacionDAO=eventoPublicacionDAO;
     }
 
     public List<SolicitudEventoDTO> getAll(){
@@ -68,6 +70,19 @@ public class SolicitudEventoBL {
         Timestamp timestamp = new Timestamp(datetime);
         solicitudEventoDTO.setFecha_revisado(timestamp);
         solicitudEventoDAO.estadoSoli(solicitudEventoDTO.getEstado(),solicitudEventoDTO.getFecha_revisado(), id);
+        // para el mail-----------------------------
+        if(solicitudEventoDTO.getEstado()==1){
+            Evento_publicacionDTO ep= eventoPublicacionDAO.getEvento(id);
+            emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+ep.getTitulo()+"'' fue ACEPTADA","" +
+                    "La Solicitud ''" +ep.getTitulo()+"'' fue revisada y ACEPTADA con los datos: "+ep.toString());
+        }
+        if(solicitudEventoDTO.getEstado()==2){
+            Evento_publicacionDTO ep= eventoPublicacionDAO.getEvento(id);
+            emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+ep.getTitulo()+"'' fue RECHAZADA","" +
+                    "La Solicitud ''" +ep.getTitulo()+"'' fue revisada y RECHAZADA ");
+        }
+
+        //-----------------------------------------------
         return solicitudEventoDTO;
     }
 
@@ -111,6 +126,10 @@ public class SolicitudEventoBL {
 
     public ComentarioDTO insetComentario (Integer user_id, ComentarioDTO comentarioDTO){
         comentariosDao.insertComentarioSolicitud(comentarioDTO.getComentario(),user_id);
+        SolicitudEventoDTO st= solicitudEventoDAO.findAllById(user_id);
+        Evento_publicacionDTO ep= eventoPublicacionDAO.getEvento((int)st.getEvento_publicacion_ep_id());
+        emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+ep.getTitulo()+"'' fue puesta en revision","" +
+                "La Solicitud ''" +ep.getTitulo()+"'' fue revisada y debe ser modificada, el motivo es: "+comentarioDTO.getComentario());
       return comentarioDTO;
     };
 
