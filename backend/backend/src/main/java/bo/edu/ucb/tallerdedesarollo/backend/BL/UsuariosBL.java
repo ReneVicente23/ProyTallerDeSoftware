@@ -71,7 +71,7 @@ public class UsuariosBL {
         Integer id=usuarioDAO.getUserid(usuarioId);
         return interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(id);
     }
-    
+
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
         Timestamp ts= new Timestamp(userProfileDTO.getBirthday().getTime()+90000000);
         //System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
