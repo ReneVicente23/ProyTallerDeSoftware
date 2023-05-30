@@ -42,5 +42,9 @@ public interface UsuarioDAO {
     @Select("SELECT userid FROM  usuarios WHERE googleid = #{googleid}")
     public Integer getUserid(@Param("googleid")String googleid);
 
+    //Lista de carreras
+    @Select("SELECT carrera FROM carrera")
+    public List<String> getCarreras();
+
 
 }
