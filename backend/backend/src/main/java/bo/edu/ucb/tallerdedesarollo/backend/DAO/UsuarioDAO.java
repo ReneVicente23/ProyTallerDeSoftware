@@ -45,4 +45,9 @@ public interface UsuarioDAO {
     //Lista de carreras
     @Select("SELECT carrera FROM carrera")
     public List<String> getCarreras();
+
+
+    //Lista de carreras
+    @Select("SELECT carrera FROM carrera")
+    public List<String> getCarreras();
 }
