@@ -189,4 +189,9 @@ public class SolicitudEventoAPI {
     public ComentarioDTO insertComentario(@PathVariable("solicitud_id") Integer id, @RequestBody ComentarioDTO comentarioDTO){
         return solicitudEventoBL.insetComentario(id, comentarioDTO);
     }
+
+    @GetMapping(path = "/comentarios/{id}")
+    public List<ComentarioDTO> getComentariosById(@PathVariable Integer id) {
+        return solicitudEventoBL.getcomentarios(id);
+    }
 }

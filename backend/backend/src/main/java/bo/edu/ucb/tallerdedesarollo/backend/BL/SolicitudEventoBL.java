@@ -133,4 +133,8 @@ public class SolicitudEventoBL {
       return comentarioDTO;
     };
 
+    public List<ComentarioDTO> getcomentarios (Integer id){
+        return comentariosDao.findcomhistory(id);
+    }
+
 }
