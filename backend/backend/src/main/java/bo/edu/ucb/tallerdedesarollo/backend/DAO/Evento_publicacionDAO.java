@@ -1,12 +1,11 @@
 package bo.edu.ucb.tallerdedesarollo.backend.DAO;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.ModificacionesDTO;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -22,7 +21,7 @@ public interface Evento_publicacionDAO {
     @Select("SELECT ep_id " +
             "FROM evento_publicacion WHERE titulo= #{titulo} AND descripcion=#{descripcion} AND id_imagen= #{id_imagen} AND lugar= #{lugar} AND link=#{link} LIMIT 1"  ) // Validacion de usuario necesaria
     public Integer findIdByContend(@Param("titulo") String titulo, @Param("descripcion") String descripcion, @Param("id_imagen") String id_imagen,@Param("lugar") String lugar,@Param("link") String link,@Param("id_tipo") Integer id_tipo);
-    @Insert("INSERT INTO interesesEventos (Intereses_interesId, evento_publicacion_ep_id)" +
+    @Insert("INSERT INTO interesesEventos ("/*Intereses_interesId*/+"sub_intereses_id_subinteres , evento_publicacion_ep_id)" +
             " VALUES (#{interesID}, #{eventoID})")
     public void save_interes(@Param("interesID") Integer idInteres, @Param("eventoID") Integer idEvento);
 
@@ -73,4 +72,22 @@ public interface Evento_publicacionDAO {
     @Update("UPDATE evento_publicacion SET titulo=#{titulo}, descripcion=#{descripcion}, id_imagen=#{id_imagen}, lugar=#{lugar}, link=#{link} WHERE ep_id = #{id}")
     public void updatePublicacion(@Param("titulo") String titulo, @Param("descripcion") String descripcion, @Param("id_imagen") String id_imagen, @Param("lugar") String lugar, @Param("link") String link, @Param("id") Integer id);
 
+    @Update("UPDATE evento_publicacion SET titulo = #{titulo}, descripcion = #{descripcion}, id_imagen = #{id_imagen}, lugar = #{lugar}, link = #{link} " +
+            " WHERE ep_id = #{id}")
+    public void updateEvento_publicacion(@Param("titulo") String titulo, @Param("descripcion") String descripcion, @Param("id_imagen") String id_imagen,@Param("lugar") String lugar,@Param("link") String link,@Param("id") Integer id_evento);
+
+    @Delete("DELETE FROM interesesEventos WHERE evento_publicacion_ep_id = #{id}")
+    public void deleteallIntereses(@Param("id") Integer publicacion_id);
+
+    @Delete("DELETE FROM publico_destino_ep WHERE evento_publicacion_ep_id = #{id}")
+    public void deleteallPublic(@Param("id") Integer publicacion_id);
+
+    @Insert("INSERT INTO modificaciones (modificacion,fechamod,evento_publicacion_ep_id)" +
+            " VALUES (#{mod},#{date},#{id}) ")
+    public void insertmod(@Param("mod") String mdoificacion, @Param("date")Timestamp fecha, @Param("id") Integer publicacion_id);
+
+    @Select("SELECT * " +
+            "FROM modificaciones WHERE evento_publicacion_ep_id= #{id}"  )
+    public List<ModificacionesDTO> findmodhistory(@Param("id") Integer id);
 }
+

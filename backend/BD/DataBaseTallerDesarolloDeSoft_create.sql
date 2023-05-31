@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-12 02:45:04.669
+-- Last modification date: 2023-05-30 14:37:55.642
 
 -- tables
 -- Table: Inscripcion
@@ -22,6 +22,13 @@ CREATE TABLE Intereses (
 CREATE TABLE audiencias (
     audienciasId int  NOT NULL,
     CONSTRAINT audiencias_pk PRIMARY KEY (audienciasId)
+);
+
+-- Table: carrera
+CREATE TABLE carrera (
+    id_carrera serial  NOT NULL,
+    carrera varchar(50)  NOT NULL,
+    CONSTRAINT carrera_pk PRIMARY KEY (id_carrera)
 );
 
 -- Table: comentario
@@ -82,8 +89,8 @@ CREATE TABLE interesesCursos (
 -- Table: interesesEventos
 CREATE TABLE interesesEventos (
     idineven serial  NOT NULL,
-    Intereses_interesId int  NOT NULL,
     evento_publicacion_ep_id int  NOT NULL,
+    sub_intereses_id_subinteres int  NOT NULL,
     CONSTRAINT interesesEventos_pk PRIMARY KEY (idineven)
 );
 
@@ -93,6 +100,15 @@ CREATE TABLE interesesUsuario (
     usuarios_userId int  NOT NULL,
     sub_intereses_id_subinteres int  NOT NULL,
     CONSTRAINT interesesUsuario_pk PRIMARY KEY (idinterUs)
+);
+
+-- Table: modificaciones
+CREATE TABLE modificaciones (
+    id_modificacion serial  NOT NULL,
+    modificacion varchar(1000)  NOT NULL,
+    fechamod timestamp  NOT NULL,
+    evento_publicacion_ep_id int  NOT NULL,
+    CONSTRAINT modificaciones_pk PRIMARY KEY (id_modificacion)
 );
 
 -- Table: paralelo
@@ -230,14 +246,6 @@ ALTER TABLE interesesCursos ADD CONSTRAINT interesesCursos_Intereses
     INITIALLY IMMEDIATE
 ;
 
--- Reference: interesesEventos_Intereses (table: interesesEventos)
-ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_Intereses
-    FOREIGN KEY (Intereses_interesId)
-    REFERENCES Intereses (interesId)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
 -- Reference: interesesEventos_evento_publicacion (table: interesesEventos)
 ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_evento_publicacion
     FOREIGN KEY (evento_publicacion_ep_id)
@@ -246,10 +254,26 @@ ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_evento_publicacion
     INITIALLY IMMEDIATE
 ;
 
+-- Reference: interesesEventos_sub_intereses (table: interesesEventos)
+ALTER TABLE interesesEventos ADD CONSTRAINT interesesEventos_sub_intereses
+    FOREIGN KEY (sub_intereses_id_subinteres)
+    REFERENCES sub_intereses (id_subinteres)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
 -- Reference: interesesUsuario_sub_intereses (table: interesesUsuario)
 ALTER TABLE interesesUsuario ADD CONSTRAINT interesesUsuario_sub_intereses
     FOREIGN KEY (sub_intereses_id_subinteres)
     REFERENCES sub_intereses (id_subinteres)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: modificaciones_evento_publicacion (table: modificaciones)
+ALTER TABLE modificaciones ADD CONSTRAINT modificaciones_evento_publicacion
+    FOREIGN KEY (evento_publicacion_ep_id)
+    REFERENCES evento_publicacion (ep_id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;

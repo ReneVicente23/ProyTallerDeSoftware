@@ -49,7 +49,7 @@ public class UsuariosBL {
             }
         }
         if (registrado == false) {
-            this.usuarioDAO.saveUsuario(usuario.getGoogleid(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail(), usuario.getPicture());
+            this.usuarioDAO.saveUsuario(usuario.getSub(), 1, usuario.getFamily_name(), usuario.getGiven_name(), usuario.getHd(), usuario.getEmail(), usuario.getPicture());
         }
         return usuario;
     }
@@ -72,14 +72,17 @@ public class UsuariosBL {
         return interesesUsuarioDAO.obtenerSubInteresesPorUsuarioId(id);
     }
 
-
     public void modUserProfile(UserProfileDTO userProfileDTO, String userid){
         Timestamp ts= new Timestamp(userProfileDTO.getBirthday().getTime()+90000000);
-        System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
-        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(),userid);
+        //System.out.println(ts.getTime()+" -- " +ts.getNanos()+ " -- "+ts.toString());
+        usuarioDAO.updateUserProfile(userProfileDTO.getNickname(),ts,userProfileDTO.getCareer(), userProfileDTO.getUsertype(), userid);
     }
 
     public UserProfileDTO getUserProfile(String userid){
         return usuarioDAO.getUserProfile(userid);
+    }
+
+    public List<String> getCarrera(){
+        return usuarioDAO.getCarreras();
     }
 }

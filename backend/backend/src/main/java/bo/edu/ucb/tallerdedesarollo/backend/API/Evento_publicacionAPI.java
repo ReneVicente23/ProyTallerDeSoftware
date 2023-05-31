@@ -2,10 +2,7 @@ package bo.edu.ucb.tallerdedesarollo.backend.API;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.InteresesDTO;
-import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -67,7 +64,15 @@ public class Evento_publicacionAPI {
     public List<Evento_publicacionDTO> findRecomendaciones3(@PathVariable("userid") String googleid) {
         return evento_publicacionBL.getRecomendaciones_v3(googleid,2);
     }
-
-
-    
+    // Edita un evento
+    @PutMapping(path = "/editmodevento", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
+    public Evento_publicacionDTO editeventoPublicacion(@RequestBody Evento_publicacionDTO evento_publicacionDTO) {
+        evento_publicacionBL.newEvento_publicacion(evento_publicacionDTO);
+        return evento_publicacionDTO;
+    }
+    //Lista de modificaciones
+    @GetMapping(path="/evento/mod/{id}", produces = APPLICATION_JSON_VALUE)
+    public List<ModificacionesDTO> findModificaciones(@PathVariable("id") Integer eventID) {
+        return evento_publicacionBL.getModificaciones(eventID);
+    }
 }

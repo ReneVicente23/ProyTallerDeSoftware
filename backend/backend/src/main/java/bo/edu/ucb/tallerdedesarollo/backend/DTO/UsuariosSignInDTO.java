@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UsuariosSignInDTO {
-    private Integer googleid;
+    private String sub;
     private Integer usertype;
     private String family_name;
     private String given_name;

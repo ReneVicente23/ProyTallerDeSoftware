@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-11 00:24:22.044
+-- Last modification date: 2023-05-30 14:37:55.642
 
 -- foreign keys
 ALTER TABLE Inscripcion
@@ -27,13 +27,16 @@ ALTER TABLE interesesCursos
     DROP CONSTRAINT interesesCursos_Intereses;
 
 ALTER TABLE interesesEventos
-    DROP CONSTRAINT interesesEventos_Intereses;
+    DROP CONSTRAINT interesesEventos_evento_publicacion;
 
 ALTER TABLE interesesEventos
-    DROP CONSTRAINT interesesEventos_evento_publicacion;
+    DROP CONSTRAINT interesesEventos_sub_intereses;
 
 ALTER TABLE interesesUsuario
     DROP CONSTRAINT interesesUsuario_sub_intereses;
+
+ALTER TABLE modificaciones
+    DROP CONSTRAINT modificaciones_evento_publicacion;
 
 ALTER TABLE paralelo
     DROP CONSTRAINT paralelo_Cursos;
@@ -66,6 +69,8 @@ DROP TABLE Intereses;
 
 DROP TABLE audiencias;
 
+DROP TABLE carrera;
+
 DROP TABLE comentario;
 
 DROP TABLE cursos;
@@ -81,6 +86,8 @@ DROP TABLE interesesCursos;
 DROP TABLE interesesEventos;
 
 DROP TABLE interesesUsuario;
+
+DROP TABLE modificaciones;
 
 DROP TABLE paralelo;
 

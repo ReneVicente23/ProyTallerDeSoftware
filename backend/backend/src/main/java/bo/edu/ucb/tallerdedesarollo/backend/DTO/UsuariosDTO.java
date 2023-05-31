@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class UsuariosDTO {
 
     private Integer userId;
-    private Integer googleId;
+    private String sub;
     private Integer usertype;
     private String family_name;
     private String given_name;
