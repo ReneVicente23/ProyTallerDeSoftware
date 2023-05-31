@@ -27,6 +27,12 @@ public class Evento_publicacionAPI {
         this.solicitudEventoBL = solicitudEventoBL;
         this.evento_publicacionBL = evento_publicacionBL;
     }
+
+    @PutMapping(path="/{id}", produces = APPLICATION_JSON_VALUE)
+    public Evento_publicacionDTO EditarEventoPublicacion(@PathVariable("id") Integer id, @RequestBody Evento_publicacionDTO evento) {
+         evento_publicacionBL.updateEventoPublicacion(evento, id);
+         return evento;
+    }
     //obtiene todos los eventos_publicacion que se tienen
 
     @GetMapping(path="/", produces = APPLICATION_JSON_VALUE) // necesitamos auth de front

@@ -23,6 +23,7 @@ public class Evento_PublicacionBL {
         eventoPublicacionDAO.saveEvento_publicacion(evento_publicacionDTO.getTitulo(),evento_publicacionDTO.getDescripcion(),evento_publicacionDTO.getId_imagen(),evento_publicacionDTO.getLugar(),evento_publicacionDTO.getLink(),evento_publicacionDTO.getEvento_publicacion_tipo_id_eptipo());
     }
 
+
     public Integer newEvento (EventoRecepcionDTO eventoRecepcionDTO){
         eventoPublicacionDAO.saveEvento_publicacion(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
         Integer idEvento=eventoPublicacionDAO.findIdByContend(eventoRecepcionDTO.getTitulo(),eventoRecepcionDTO.getDescripcion(),eventoRecepcionDTO.getId_imagen(),eventoRecepcionDTO.getLugar(),eventoRecepcionDTO.getLink(),1);
@@ -74,6 +75,8 @@ public class Evento_PublicacionBL {
         return eventoPublicacionDAO.getRecomendaciones_V3(googleid,edadID);
     }
 
-    
+    public void updateEventoPublicacion(Evento_publicacionDTO evento, Integer id) {
+        eventoPublicacionDAO.updatePublicacion(evento.getTitulo(), evento.getDescripcion(), evento.getId_imagen(), evento.getLugar(), evento.getLink(), id);
+    }
 
 }
