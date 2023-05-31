@@ -74,7 +74,7 @@ public class SolicitudEventoBL {
         if(solicitudEventoDTO.getEstado()==1){
             Evento_publicacionDTO ep= eventoPublicacionDAO.getEvento(id);
             emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+ep.getTitulo()+"'' fue ACEPTADA","" +
-                    "La Solicitud ''" +ep.getTitulo()+"'' fue revisada y ACEPTADA con los datos: "+ep.toString());
+                    "La Solicitud ''" +ep.getTitulo()+"'' fue revisada y ACEPTADA con los datos: "+ep.getTitulo()+ "de descripcion" + ep.getDescripcion() + ep.getLink() + "y lugar" + ep.getLugar());
         }
         if(solicitudEventoDTO.getEstado()==2){
             Evento_publicacionDTO ep= eventoPublicacionDAO.getEvento(id);
