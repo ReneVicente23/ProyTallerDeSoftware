@@ -75,10 +75,11 @@ public class Evento_PublicacionBL {
         return eventoPublicacionDAO.getRecomendaciones_V3(googleid,edadID);
     }
 
-<<<<<<< HEAD
+
     public void updateEventoPublicacion(Evento_publicacionDTO evento, Integer id) {
         eventoPublicacionDAO.updatePublicacion(evento.getTitulo(), evento.getDescripcion(), evento.getId_imagen(), evento.getLugar(), evento.getLink(), id);
-=======
+    }
+
     public Integer editEvento (EventoRecepcionDTO eventoRecepcionDTO){
         String log="";
         Integer idEvento= (int) eventoRecepcionDTO.getEp_id();
@@ -141,7 +142,7 @@ public class Evento_PublicacionBL {
 
     public List<ModificacionesDTO> getModificaciones (Integer id){
         return eventoPublicacionDAO.findmodhistory(id);
->>>>>>> 7028e09bb2c9e999feaf668d24e25eb79cf1ab72
+
     }
 
 }
