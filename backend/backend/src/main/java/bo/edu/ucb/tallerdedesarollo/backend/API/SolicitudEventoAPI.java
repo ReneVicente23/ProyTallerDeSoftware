@@ -1,12 +1,14 @@
 package bo.edu.ucb.tallerdedesarollo.backend.API;
 
 import bo.edu.ucb.tallerdedesarollo.backend.BL.Evento_PublicacionBL;
+import bo.edu.ucb.tallerdedesarollo.backend.BL.FileSystemStorageService;
 import bo.edu.ucb.tallerdedesarollo.backend.BL.SolicitudEventoBL;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoWPublicoDTO;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -41,10 +43,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SolicitudEventoAPI {
     private SolicitudEventoBL solicitudEventoBL;
     private Evento_PublicacionBL evento_publicacionBL;
+    private FileSystemStorageService fileSystemStorageService;
 
-    public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL, Evento_PublicacionBL evento_publicacionBL) {
+    
+    public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL, Evento_PublicacionBL evento_publicacionBL,
+            FileSystemStorageService fileSystemStorageService) {
         this.solicitudEventoBL = solicitudEventoBL;
         this.evento_publicacionBL = evento_publicacionBL;
+        this.fileSystemStorageService = fileSystemStorageService;
     }
 
     @GetMapping(path="/test", produces = APPLICATION_JSON_VALUE)
@@ -125,6 +131,18 @@ public class SolicitudEventoAPI {
         map.put("id", name2);
        return map;
     }
+
+    @GetMapping(value="imagen4/{filename:.+}")
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) throws IOException {
+        Resource file = fileSystemStorageService.loadAsResource(filename);
+        String contentType = Files.probeContentType(file.getFile().toPath());
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(file);
+    }
+    
 
     @GetMapping(path="/image/{imagename}")
     public  ResponseEntity<Resource> findImage(@PathVariable("imagename") String id) throws IOException {
