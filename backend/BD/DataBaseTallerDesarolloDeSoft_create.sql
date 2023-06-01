@@ -169,7 +169,7 @@ CREATE TABLE sub_intereses (
 CREATE TABLE usuarios (
     userId serial  NOT NULL,
     googleId varchar(100)  NOT NULL,
-    usertype int  NOT NULL,
+    usertype int  NULL,
     family_name varchar(100)  NOT NULL,
     given_name varchar(100)  NOT NULL,
     hd varchar(50)  NOT NULL,

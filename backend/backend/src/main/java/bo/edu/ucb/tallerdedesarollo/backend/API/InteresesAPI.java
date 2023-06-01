@@ -2,6 +2,7 @@ package bo.edu.ucb.tallerdedesarollo.backend.API;
 
 import java.util.List;
 
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.SubInteresesDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,10 @@ public class InteresesAPI {
     @GetMapping(path = "/mostrar/{id}", produces = APPLICATION_JSON_VALUE)
     public InteresesSub getInteresesSubMostrar(@PathVariable Integer id) {
         return interesesBL.getInteresSub(id);
+    }
+
+    @GetMapping(path = "/mostrar2", produces = APPLICATION_JSON_VALUE)
+    public List<SubInteresesDTO> getInteresesMostrar2() {
+        return interesesBL.getInteresSub2();
     }
 }

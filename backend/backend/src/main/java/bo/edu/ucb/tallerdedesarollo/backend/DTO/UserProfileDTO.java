@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class UserProfileDTO {
     private Integer userId;
-    private Integer googleId;
+    private String googleId;
     private Integer usertype;
     private String family_name;
     private String given_name;

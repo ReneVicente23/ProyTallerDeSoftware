@@ -16,7 +16,7 @@ public interface InteresesUsuarioDAO {
     public void asignarInteresUsuario(@Param("usuarioId") Integer usuarioId, @Param("subInteresId") Integer subInteresId);
 
     @Select("SELECT s.id_subinteres, s.nombre FROM sub_intereses s JOIN interesesusuario i ON s.id_subinteres = i.sub_intereses_id_subinteres WHERE i.usuarios_userid = #{usuarioId}")
-    List<SubInteres> obtenerSubInteresesPorUsuarioId(Integer usuarioId);
+    List<SubInteres> obtenerSubInteresesPorUsuarioId(@Param("usuarioId") Integer usuarioId);
 
     @Delete("DELETE FROM interesesusuario WHERE usuarios_userId = #{Id} ")
     public void delSubInteres(@Param("Id") Integer id);

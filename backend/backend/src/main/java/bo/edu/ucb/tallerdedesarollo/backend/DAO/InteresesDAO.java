@@ -30,6 +30,8 @@ public interface InteresesDAO {
     @Select("SELECT * From sub_intereses WHERE Intereses_interesId = (#{idInteres})")
     public List<SubInteresesDTO> findAllSubIntereses(@Param("idInteres") Integer id);
 
+    @Select("SELECT * From sub_intereses")
+    public List<SubInteresesDTO> findAllSubIntereses2();
 
-    
+
 }

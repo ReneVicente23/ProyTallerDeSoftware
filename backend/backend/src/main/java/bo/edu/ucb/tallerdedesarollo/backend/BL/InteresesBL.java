@@ -22,6 +22,7 @@ public class InteresesBL {
     Logger LOOGER = LoggerFactory.getLogger(InteresesBL.class);
     private InteresesDAO interesesDAO;
 
+
     @Autowired
     public InteresesBL(InteresesDAO interesesDAO) {
         this.interesesDAO = interesesDAO;
@@ -64,5 +65,15 @@ public class InteresesBL {
         newInteres.setImagen(interes.getImagen());
         newInteres.setSubIntereses(subInter);
         return newInteres;
+    }
+
+
+    public List<SubInteresesDTO> getInteresSub2() {
+        List<SubInteresesDTO> subInter = this.interesesDAO.findAllSubIntereses2();
+//        SubInteresesDTO newInteres = new SubInteresesDTO();
+//        newInteres.setIntereses_interesId(newInteres.getIntereses_interesId());
+//        newInteres.setNombre(newInteres.getNombre());
+//        newInteres.setId_subinteres(newInteres.getId_subinteres());
+        return subInter;
     }
 }
