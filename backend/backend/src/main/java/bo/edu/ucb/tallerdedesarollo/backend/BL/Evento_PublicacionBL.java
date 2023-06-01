@@ -74,14 +74,31 @@ public class Evento_PublicacionBL {
 
     public List<Evento_publicacionDTO> getRecomendaciones_v1 (String googleid){
         UserProfileDTO user= usuariosBL.getUserProfile(googleid);
+        List<Evento_publicacionDTO> listaux;
         Long edad;
         if(user.getBirthday()!=null){
             Long datetime = System.currentTimeMillis();
             edad=(datetime)-(user.getBirthday().getTime());
             System.out.println("Edad: "+edad);
-            return eventoPublicacionDAO.getRecomendaciones_V1(googleid,2);
+            listaux= eventoPublicacionDAO.getRecomendaciones_V1(googleid,2);
+        }else{
+            listaux=eventoPublicacionDAO.getRecomendaciones_V2(googleid);
         }
-        return eventoPublicacionDAO.getRecomendaciones_V2(googleid);
+        String mesage = "Por tus intereses te recomendamos: ";
+        for (Evento_publicacionDTO et: listaux) {
+            mesage = mesage +" *****  Titulo: " +et.getTitulo() + " - Descripcion: "+et.getDescripcion() + " - Lugar/Link "+ et.getLugar()+et.getLink();
+        }
+        //-------------------- Enviador de solicitudes ---------------------------
+        /* para cuando se envia userid correcto
+        emailService.sendSimpleMessage(user.getEmail(), "Eventos recomendados","" +
+                mesage);*/
+        //------------------------------------------------------------------------
+        //-------------------- Enviador de solicitudes ---------------------------
+        /*
+        emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "Eventos recomendados","" +
+                mesage);*/
+        //------------------------------------------------------------------------
+        return listaux;
     }
     public List<Evento_publicacionDTO> getRecomendaciones_v2 (String googleid){
         return eventoPublicacionDAO.getRecomendaciones_V2(googleid);
