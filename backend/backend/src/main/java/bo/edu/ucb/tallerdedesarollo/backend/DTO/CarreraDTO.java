@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CarreraDTO {
-    private Long id;
+    private Long id_carrera;
     private String carrera;
 }
