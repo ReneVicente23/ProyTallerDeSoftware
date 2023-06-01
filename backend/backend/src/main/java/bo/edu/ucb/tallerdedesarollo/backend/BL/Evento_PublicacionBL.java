@@ -14,6 +14,7 @@ public class Evento_PublicacionBL {
     UsuariosBL usuariosBL;
     private EmailServiceImpl emailService;
 
+
     @Autowired
     public Evento_PublicacionBL(Evento_publicacionDAO eventoPublicacionDAO, UsuariosBL usuariosBL, EmailServiceImpl emailService) {
         this.eventoPublicacionDAO = eventoPublicacionDAO;
@@ -76,13 +77,54 @@ public class Evento_PublicacionBL {
         UserProfileDTO user= usuariosBL.getUserProfile(googleid);
         List<Evento_publicacionDTO> listaux;
         Long edad;
-        if(user.getBirthday()!=null){
-            Long datetime = System.currentTimeMillis();
-            edad=(datetime)-(user.getBirthday().getTime());
-            System.out.println("Edad: "+edad);
-            listaux= eventoPublicacionDAO.getRecomendaciones_V1(googleid,2);
+        Integer aux=2;
+        List<SubInteres> in= usuariosBL.obtenerSubInteresesPorUsuarioId(googleid);
+        if(in.isEmpty()){
+            if(user.getBirthday()==null){
+                listaux= eventoPublicacionDAO.getRecomendaciones_V3(googleid);
+                System.out.println("Usuario sin edad ni subintereses ");
+            }else{
+                Long datetime = System.currentTimeMillis();
+                edad=((datetime)-(user.getBirthday().getTime()))/31557600000L;
+                if(edad<=30){
+                    aux=2;
+                }else{
+                    if(edad<=60){
+                        aux=3;
+                    }else{
+                        aux=4;
+                    }
+                }
+                System.out.println("Edad: "+edad+ " group: "+ aux);
+                listaux= eventoPublicacionDAO.getRecomendaciones_V4(googleid,aux);
+                System.out.println("Usuario sin subintereses ");
+
+            }
         }else{
-            listaux=eventoPublicacionDAO.getRecomendaciones_V2(googleid);
+            if(user.getBirthday()!=null){
+                try {
+                    Long datetime = System.currentTimeMillis();
+                    edad=((datetime)-(user.getBirthday().getTime()))/31557600000L;
+                    if(edad<=30){
+                        aux=2;
+                    }else{
+                        if(edad<=60){
+                            aux=3;
+                        }else{
+                            aux=4;
+                        }
+                    }
+                    System.out.println("Edad: "+edad+ " group: "+ aux);
+                    listaux= eventoPublicacionDAO.getRecomendaciones_V1(googleid,aux);
+                    System.out.println("Usuario completo ");
+                }catch (NullPointerException e){
+                    listaux=eventoPublicacionDAO.getRecomendaciones_V2(googleid);
+                    System.out.println("Usuario sin edad ");
+                }
+            }else{
+                listaux=eventoPublicacionDAO.getRecomendaciones_V2(googleid);
+                System.out.println("Usuario sin edad ");
+            }
         }
         String mesage = "Por tus intereses te recomendamos: ";
         for (Evento_publicacionDTO et: listaux) {
@@ -105,7 +147,7 @@ public class Evento_PublicacionBL {
     }
 
     public List<Evento_publicacionDTO> getRecomendaciones_v3 (String googleid, Integer edadID){
-        return eventoPublicacionDAO.getRecomendaciones_V3(googleid,edadID);
+        return eventoPublicacionDAO.getRecomendaciones_V3(googleid);
     }
 
 
