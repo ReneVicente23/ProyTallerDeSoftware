@@ -91,4 +91,8 @@ public class UsuariosBL {
     public List<String> getCarrera(){
         return usuarioDAO.getCarreras();
     }
+
+    public List<UsuariosDTO> getUsuariosByuserType() {
+        return this.usuarioDAO.findByuserType();
+    }
 }
