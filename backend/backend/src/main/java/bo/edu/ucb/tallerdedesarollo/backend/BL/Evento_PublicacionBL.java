@@ -11,10 +11,12 @@ import java.util.List;
 @Service
 public class Evento_PublicacionBL {
     Evento_publicacionDAO eventoPublicacionDAO;
+    UsuariosBL usuariosBL;
 
     @Autowired
-    public Evento_PublicacionBL(Evento_publicacionDAO eventoPublicacionDAO) {
+    public Evento_PublicacionBL(Evento_publicacionDAO eventoPublicacionDAO, UsuariosBL usuariosBL) {
         this.eventoPublicacionDAO = eventoPublicacionDAO;
+        this.usuariosBL = usuariosBL;
     }
     //Crea un nuevo eventoPublicacion
     public void newEvento_publicacion (Evento_publicacionDTO evento_publicacionDTO){
@@ -65,7 +67,15 @@ public class Evento_PublicacionBL {
     }
 
     public List<Evento_publicacionDTO> getRecomendaciones_v1 (String googleid){
-        return eventoPublicacionDAO.getRecomendaciones_V1(googleid);
+        UserProfileDTO user= usuariosBL.getUserProfile(googleid);
+        Long edad;
+        if(user.getBirthday()!=null){
+            Long datetime = System.currentTimeMillis();
+            edad=(datetime)-(user.getBirthday().getTime());
+            System.out.println("Edad: "+edad);
+            return eventoPublicacionDAO.getRecomendaciones_V1(googleid,2);
+        }
+        return eventoPublicacionDAO.getRecomendaciones_V2(googleid);
     }
     public List<Evento_publicacionDTO> getRecomendaciones_v2 (String googleid){
         return eventoPublicacionDAO.getRecomendaciones_V2(googleid);

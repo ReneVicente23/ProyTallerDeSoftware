@@ -40,26 +40,27 @@ public interface Evento_publicacionDAO {
             " WHERE ep_id = #{id} ")
     public Evento_publicacionDTO getEvento(@Param("id") Integer id);
 
-    @Select(" SELECT p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
-            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
-            " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
-            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+    @Select(" SELECT distinct on(p.ep_id) p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN sub_intereses o ON o.id_subinteres = i.sub_intereses_id_subinteres " +
+            //" JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
+            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = o.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+            " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" + // publico destino
             " JOIN solicitudes j ON j.evento_publicacion_ep_id = p.ep_id " +
-            " WHERE k.googleId = #{user_id}" +  // si no funciona cambiar # por $ o biceversa
-            " AND j.fecha_revisado is not null AND j.estado = 1 ORDER BY j.fecha_revisado desc") // anadir desc
-    public List<Evento_publicacionDTO> getRecomendaciones_V1(@Param("user_id")String user_id); //Retorna las recomendaciones solo por Intereses
+            " WHERE k.googleId = #{user_id} AND (d.publico_tipo_id_publico = (k.usertype + 1) OR d.rangos_edad_id_rangos_edad = #{edad})" +  // si no funciona cambiar # por $ o biceversa
+            " AND j.fecha_revisado is not null AND j.estado = 1 ORDER BY p.ep_id,j.fecha_revisado desc") // anadir desc
+    public List<Evento_publicacionDTO> getRecomendaciones_V1(@Param("user_id")String user_id, @Param("edad")Integer edad); //Retorna las recomendaciones solo por Intereses
 
-    @Select(" SELECT p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
-            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
-            " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
-            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
+    @Select(" SELECT distinct on(p.ep_id) p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+            " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN sub_intereses o ON o.id_subinteres = i.sub_intereses_id_subinteres " +
+            //" JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
+            " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = o.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
             " JOIN publico_destino_ep d ON p.ep_id = d.evento_publicacion_ep_id JOIN publico_tipo l ON l.id_publico = d.publico_tipo_id_publico" +
             " JOIN solicitudes j ON j.evento_publicacion_ep_id = p.ep_id " +
             " WHERE k.googleId = #{user_id} AND d.publico_tipo_id_publico = (k.usertype + 1)" +
-            " AND j.fecha_revisado is not null ORDER BY j.fecha_revisado")
+            " AND j.fecha_revisado is not null AND j.estado = 1 ORDER BY p.ep_id,j.fecha_revisado desc")
     public List<Evento_publicacionDTO> getRecomendaciones_V2(@Param("user_id")String user_id); //Retorna las recomendaciones por Intereses y tipo
 
-    @Select(" SELECT  p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
+    @Select(" SELECT p.ep_id, p.titulo, p.descripcion, p.id_imagen, p.lugar, p.link FROM evento_publicacion p " +
             " JOIN interesesEventos i ON p.ep_id = i.evento_publicacion_ep_id JOIN Intereses o ON o.interesId = i.Intereses_interesId " +
             " JOIN sub_intereses s ON o.interesId = s.Intereses_interesId " + // Validar para posibles modificaciones a BD
             " JOIN interesesUsuario u ON u.sub_intereses_id_subinteres = s.id_subinteres JOIN usuarios k ON k.userId = u.usuarios_userId " +
