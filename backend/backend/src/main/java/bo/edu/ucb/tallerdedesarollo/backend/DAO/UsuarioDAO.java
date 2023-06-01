@@ -45,4 +45,7 @@ public interface UsuarioDAO {
     //Lista de carreras
     @Select("SELECT carrera FROM carrera")
     public List<String> getCarreras();
+
+    @Select("SELECT * FROM usuarios WHERE usertype = 3")
+    public List<UsuariosDTO> findByuserType();
 }
