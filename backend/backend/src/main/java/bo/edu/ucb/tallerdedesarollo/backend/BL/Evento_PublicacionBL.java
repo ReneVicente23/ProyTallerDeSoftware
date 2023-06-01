@@ -125,22 +125,24 @@ public class Evento_PublicacionBL {
             log=log+" / ";
         }
         if(!eventoRecepcionDTO.getPublico().contentEquals("")){
-            eventoPublicacionDAO.deleteallPublic(idEvento);
-            String[] publicoaux= eventoRecepcionDTO.getPublico().split("-");
+            String[] publicoaux= eventoRecepcionDTO.getPublico().split("/");
             System.out.println("Estas Aqui----------------");
-            Integer auxi=2;
-            if(publicoaux[0].contentEquals("Edad")){
-                auxi=1;
-                for(int i=0;i<publicoaux.length-1;i++){
-                    eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(publicoaux[i+1]),1);
-                    System.out.println("Edad "+publicoaux[i+1]);
-                }
-            }else{
-                for(int i=0;i<publicoaux.length-1;i++){
-                    eventoPublicacionDAO.save_publico(idEvento,auxi,1,Integer.parseInt(publicoaux[i+1]));
+            Integer auxi=3;
+            if(!publicoaux[0].contentEquals("")){
+                //auxi=1;
+                String[] pb2=publicoaux[0].split("-");
+                for(int i=0;i<pb2.length-1;i++){
+                    eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(pb2[i+1]),1);
+                    System.out.println("Edad "+pb2[0]);
                 }
             }
-
+            if(!publicoaux[1].contentEquals("")){
+                String[] pb2=publicoaux[1].split("-");
+                for(int i=0;i<pb2.length-1;i++){
+                    eventoPublicacionDAO.save_publico(idEvento,auxi,1,Integer.parseInt(pb2[i+1]));
+                    System.out.println("Tipo "+pb2[i+1]);
+                }
+            }
         }
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);

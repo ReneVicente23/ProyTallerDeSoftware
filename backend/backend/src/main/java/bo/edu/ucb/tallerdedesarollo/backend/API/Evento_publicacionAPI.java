@@ -66,9 +66,9 @@ public class Evento_publicacionAPI {
     }
     // Edita un evento
     @PutMapping(path = "/editmodevento", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE )
-    public Evento_publicacionDTO editeventoPublicacion(@RequestBody Evento_publicacionDTO evento_publicacionDTO) {
-        evento_publicacionBL.newEvento_publicacion(evento_publicacionDTO);
-        return evento_publicacionDTO;
+    public EventoRecepcionDTO editeventoPublicacion(@RequestBody EventoRecepcionDTO eventoRecepcionDTO) {
+        evento_publicacionBL.editEvento(eventoRecepcionDTO);
+        return eventoRecepcionDTO;
     }
     //Lista de modificaciones
     @GetMapping(path="/evento/mod/{id}", produces = APPLICATION_JSON_VALUE)
