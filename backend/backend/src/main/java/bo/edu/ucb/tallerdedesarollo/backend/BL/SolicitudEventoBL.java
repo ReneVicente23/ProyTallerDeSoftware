@@ -137,4 +137,8 @@ public class SolicitudEventoBL {
         return comentariosDao.findcomhistory(id);
     }
 
+    public SolicitudEventoDTO getSolicitudByEventId(Integer id) {
+        return solicitudEventoDAO.findAllByEvent(id);
+    }
+
 }

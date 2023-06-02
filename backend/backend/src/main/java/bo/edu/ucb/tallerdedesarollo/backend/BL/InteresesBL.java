@@ -76,4 +76,9 @@ public class InteresesBL {
 //        newInteres.setId_subinteres(newInteres.getId_subinteres());
         return subInter;
     }
+
+    public List<SubInteresesDTO> getInteresSubByEvent(Integer id) {
+        List<SubInteresesDTO> subInter = this.interesesDAO.findAllSubInteresesFromEvent(id);
+        return subInter;
+    }
 }

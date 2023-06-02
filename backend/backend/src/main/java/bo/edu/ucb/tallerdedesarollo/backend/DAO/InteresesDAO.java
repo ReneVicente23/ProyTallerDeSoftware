@@ -33,5 +33,8 @@ public interface InteresesDAO {
     @Select("SELECT * From sub_intereses")
     public List<SubInteresesDTO> findAllSubIntereses2();
 
+    @Select("SELECT * From sub_intereses j JOIN interesesEventos i ON i.sub_intereses_id_subinteres=j.id_subinteres WHERE i.evento_publicacion_ep_id= #{id} ")
+    public List<SubInteresesDTO> findAllSubInteresesFromEvent(@Param("id")Integer id);
+
 
 }

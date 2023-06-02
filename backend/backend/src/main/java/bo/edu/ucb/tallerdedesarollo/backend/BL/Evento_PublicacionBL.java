@@ -1,11 +1,13 @@
 package bo.edu.ucb.tallerdedesarollo.backend.BL;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.Evento_publicacionDAO;
+import bo.edu.ucb.tallerdedesarollo.backend.DAO.SolicitudEventoDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,13 +15,17 @@ public class Evento_PublicacionBL {
     Evento_publicacionDAO eventoPublicacionDAO;
     UsuariosBL usuariosBL;
     private EmailServiceImpl emailService;
+    SolicitudEventoBL solicitudEventoBL;
+    InteresesBL interesesBL;
 
 
     @Autowired
-    public Evento_PublicacionBL(Evento_publicacionDAO eventoPublicacionDAO, UsuariosBL usuariosBL, EmailServiceImpl emailService) {
+    public Evento_PublicacionBL(Evento_publicacionDAO eventoPublicacionDAO, UsuariosBL usuariosBL, EmailServiceImpl emailService, SolicitudEventoBL solicitudEventoBL, InteresesBL interesesBL) {
         this.eventoPublicacionDAO = eventoPublicacionDAO;
         this.usuariosBL = usuariosBL;
         this.emailService = emailService;
+        this.solicitudEventoBL=solicitudEventoBL;
+        this.interesesBL=interesesBL;
     }
     //Crea un nuevo eventoPublicacion
     public void newEvento_publicacion (Evento_publicacionDTO evento_publicacionDTO){
@@ -85,9 +91,10 @@ public class Evento_PublicacionBL {
         return evento;
     }
 
-    public List<Evento_publicacionDTO> getRecomendaciones_v1 (String googleid){
+    public List<Evento_publicacion_recomendacionDTO> getRecomendaciones_v1 (String googleid){
         UserProfileDTO user= usuariosBL.getUserProfile(googleid);
         List<Evento_publicacionDTO> listaux;
+        List<Evento_publicacion_recomendacionDTO> listaux2=new ArrayList<Evento_publicacion_recomendacionDTO>();
         Long edad;
         Integer aux=2;
         List<SubInteres> in= usuariosBL.obtenerSubInteresesPorUsuarioId(googleid);
@@ -141,6 +148,9 @@ public class Evento_PublicacionBL {
         String mesage = "Por tus intereses te recomendamos: ";
         for (Evento_publicacionDTO et: listaux) {
             mesage = mesage +" *****  Titulo: " +et.getTitulo() + " - Descripcion: "+et.getDescripcion() + " - Lugar/Link "+ et.getLugar()+et.getLink();
+            SolicitudEventoDTO st= solicitudEventoBL.getSolicitudByEventId(et.getEp_id());
+            List<SubInteresesDTO> gt= interesesBL.getInteresSubByEvent(et.getEp_id());
+            listaux2.add(new Evento_publicacion_recomendacionDTO(et.getEp_id(),et.getTitulo(),et.getDescripcion(),et.getId_imagen(),et.getLugar(),et.getLink(),et.getEvento_publicacion_tipo_id_eptipo(),st.getFecha_revisado(),gt));
         }
         //-------------------- Enviador de solicitudes ---------------------------
         /* para cuando se envia userid correcto
@@ -152,7 +162,7 @@ public class Evento_PublicacionBL {
         emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "Eventos recomendados","" +
                 mesage);*/
         //------------------------------------------------------------------------
-        return listaux;
+        return listaux2;
     }
     public List<Evento_publicacionDTO> getRecomendaciones_v2 (String googleid){
         return eventoPublicacionDAO.getRecomendaciones_V2(googleid);
