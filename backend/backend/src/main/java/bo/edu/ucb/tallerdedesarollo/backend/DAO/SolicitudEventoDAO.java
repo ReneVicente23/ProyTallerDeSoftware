@@ -56,6 +56,6 @@ public interface SolicitudEventoDAO {
             " WHERE evento_publicacion_ep_id = #{id_sol} AND p.id_rangos_edad <> 1")
     public List<Publico_edadDTO> findpublicedad(@Param("id_sol") Integer id_solicitud);
 
-    @Select(" SELECT * FROM solicitudes WHERE evento_publicacion_ep_id = #{id};")
+    @Select(" SELECT * FROM solicitudes WHERE evento_publicacion_ep_id = #{id} LIMIT 1")
     public SolicitudEventoDTO findAllByEvent(@Param("id") Integer id);
 }

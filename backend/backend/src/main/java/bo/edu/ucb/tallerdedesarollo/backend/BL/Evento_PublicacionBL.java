@@ -75,7 +75,7 @@ public class Evento_PublicacionBL {
                 " (reenvio de prueba) La Solicitud ''" +eventoRecepcionDTO.getTitulo()+"'' Fue creada y espera revision, con los datos: "+" TITULO: "+eventoRecepcionDTO.getTitulo()+ " -- DESCRIPCION: " + eventoRecepcionDTO.getDescripcion() +" -- LINK/LUGAR: "+ eventoRecepcionDTO.getLink()+ " "+ eventoRecepcionDTO.getLugar());
         */
         //---------------------------------- Fin Mail -------------------------------------------
-        
+
         return idEvento;
     }
 
