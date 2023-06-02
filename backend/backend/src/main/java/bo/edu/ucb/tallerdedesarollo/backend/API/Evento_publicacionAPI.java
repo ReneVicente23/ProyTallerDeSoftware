@@ -75,4 +75,9 @@ public class Evento_publicacionAPI {
     public List<ModificacionesDTO> findModificaciones(@PathVariable("id") Integer eventID) {
         return evento_publicacionBL.getModificaciones(eventID);
     }
+
+    @GetMapping(path="/evento/publico/{id}", produces = APPLICATION_JSON_VALUE)
+    public PublicoDestDTO findEventPublic(@PathVariable("id")Integer eventoID){
+        return evento_publicacionBL.getpublicDest(eventoID);
+    }
 }

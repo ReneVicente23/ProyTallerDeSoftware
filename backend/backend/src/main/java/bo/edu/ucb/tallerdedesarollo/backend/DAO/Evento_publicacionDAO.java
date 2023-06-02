@@ -2,6 +2,8 @@ package bo.edu.ucb.tallerdedesarollo.backend.DAO;
 
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.Evento_publicacionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.ModificacionesDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_edadDTO;
+import bo.edu.ucb.tallerdedesarollo.backend.DTO.Publico_tipoDTO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +102,13 @@ public interface Evento_publicacionDAO {
     @Select("SELECT * " +
             "FROM modificaciones WHERE evento_publicacion_ep_id= #{id}"  )
     public List<ModificacionesDTO> findmodhistory(@Param("id") Integer id);
+
+    @Select("SELECT distinct on(j.id_publico) * " +
+            "FROM publico_tipo j JOIN publico_destino_ep i ON j.id_publico=i.publico_tipo_id_publico WHERE i.evento_publicacion_ep_id= #{id} ORDER BY j.id_publico desc")
+    public List<Publico_tipoDTO> findpublucoDes(@Param("id") Integer id);
+
+    @Select("SELECT distinct on(j.id_rangos_edad) * " +
+            "FROM rangos_edad j JOIN publico_destino_ep i ON j.id_rangos_edad=i.rangos_edad_id_rangos_edad WHERE i.evento_publicacion_ep_id= #{id} ORDER BY j.id_rangos_edad desc"  )
+    public List<Publico_edadDTO> findEdadDes(@Param("id") Integer id);
 }
 

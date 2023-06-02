@@ -239,7 +239,10 @@ public class Evento_PublicacionBL {
 
     public List<ModificacionesDTO> getModificaciones (Integer id){
         return eventoPublicacionDAO.findmodhistory(id);
+    }
 
+    public PublicoDestDTO getpublicDest(Integer id){
+        return new PublicoDestDTO(eventoPublicacionDAO.findEdadDes(id),eventoPublicacionDAO.findpublucoDes(id));
     }
 
 }
