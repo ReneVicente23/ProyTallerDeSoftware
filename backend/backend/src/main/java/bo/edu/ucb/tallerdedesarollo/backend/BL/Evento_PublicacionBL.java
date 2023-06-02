@@ -64,9 +64,6 @@ public class Evento_PublicacionBL {
         //eventoPublicacionDAO.save_publico(idEvento,1,2,1); //llenar con datos de front
         // --------------------------------- Mail ----------------------------------------------
         /*
-        emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+eventoRecepcionDTO.getTitulo()+"'' fue CREADA","" +
-                "La Solicitud ''" +eventoRecepcionDTO.getTitulo()+"'' Fue creada y espera revision, con los datos: "+" TITULO: "+eventoRecepcionDTO.getTitulo()+ " -- DESCRIPCION: " + eventoRecepcionDTO.getDescripcion() +" -- LINK/LUGAR: "+ eventoRecepcionDTO.getLink()+ " "+ eventoRecepcionDTO.getLugar());
-        */
         List<UsuariosDTO> des= usuariosBL.getUsuariosByuserType();
         if(!des.isEmpty()){
             for (UsuariosDTO us: des) {
@@ -76,8 +73,9 @@ public class Evento_PublicacionBL {
         }
         emailService.sendSimpleMessage("rene.vicente@ucb.edu.bo", "La solicitud ''"+eventoRecepcionDTO.getTitulo()+"'' fue CREADA","" +
                 " (reenvio de prueba) La Solicitud ''" +eventoRecepcionDTO.getTitulo()+"'' Fue creada y espera revision, con los datos: "+" TITULO: "+eventoRecepcionDTO.getTitulo()+ " -- DESCRIPCION: " + eventoRecepcionDTO.getDescripcion() +" -- LINK/LUGAR: "+ eventoRecepcionDTO.getLink()+ " "+ eventoRecepcionDTO.getLugar());
+        */
         //---------------------------------- Fin Mail -------------------------------------------
-
+        
         return idEvento;
     }
 
