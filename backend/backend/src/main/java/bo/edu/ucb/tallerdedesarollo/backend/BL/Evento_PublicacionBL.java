@@ -3,6 +3,9 @@ package bo.edu.ucb.tallerdedesarollo.backend.BL;
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.Evento_publicacionDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DAO.SolicitudEventoDAO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ public class Evento_PublicacionBL {
     private EmailServiceImpl emailService;
     SolicitudEventoBL solicitudEventoBL;
     InteresesBL interesesBL;
+    private Logger LOGGER = LoggerFactory.getLogger(Evento_PublicacionBL.class);
 
 
     @Autowired
@@ -44,21 +48,33 @@ public class Evento_PublicacionBL {
             String[] publicoaux= eventoRecepcionDTO.getPublico().split("/");
             System.out.println("Estas Aqui----------------");
             Integer auxi=3;
-            if(!publicoaux[0].contentEquals("")){
-                //auxi=1;
-                String[] pb2=publicoaux[0].split("-");
-                for(int i=0;i<pb2.length-1;i++){
-                    eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(pb2[i+1]),1);
-                    System.out.println("Edad "+pb2[0]);
-                }
+            LOGGER.info("Publico por rango de edad es {}", publicoaux[0]);
+            LOGGER.info("Publico por tipo de publico {}", publicoaux[1]);
+
+            String[] pb2=publicoaux[0].split("-");
+            String[] pb3=publicoaux[1].split("-");
+            for(int i=0;i<pb2.length-1;i++){
+                eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(pb2[i+1]),Integer.parseInt(pb3[i+1]));
+                System.out.println("Tipo "+pb2[i+1]);
             }
-            if(!publicoaux[1].contentEquals("")){
-                String[] pb2=publicoaux[1].split("-");
-                for(int i=0;i<pb2.length-1;i++){
-                    eventoPublicacionDAO.save_publico(idEvento,auxi,1,Integer.parseInt(pb2[i+1]));
-                    System.out.println("Tipo "+pb2[i+1]);
-                }
-            }
+
+
+            // if(!publicoaux[0].contentEquals("")){
+            //     //auxi=1;
+            //     String[] pb2=publicoaux[0].split("-");
+            //     for(int i=0;i<pb2.length-1;i++){
+            //         eventoPublicacionDAO.save_publico(idEvento,auxi,Integer.parseInt(pb2[i+1]),1);
+            //         System.out.println("Edad "+pb2[0]);
+            //     }
+            // }
+            // if(!publicoaux[1].contentEquals("")){
+            //     String[] pb2=publicoaux[1].split("-");
+            //     for(int i=0;i<pb2.length-1;i++){
+            //         eventoPublicacionDAO.save_publico(idEvento,auxi,1,Integer.parseInt(pb2[i+1]));
+            //         System.out.println("Tipo "+pb2[i+1]);
+            //     }
+            // }
+
         }
         //System.out.println("publico: "+eventoRecepcionDTO.getPublico());
         //eventoPublicacionDAO.save_publico(idEvento,1,2,1); //llenar con datos de front
@@ -94,7 +110,7 @@ public class Evento_PublicacionBL {
         List<Evento_publicacionDTO> listaux;
         List<Evento_publicacion_recomendacionDTO> listaux2=new ArrayList<Evento_publicacion_recomendacionDTO>();
         Long edad;
-        Integer aux=2;
+        Integer aux = 1;
         List<SubInteres> in= usuariosBL.obtenerSubInteresesPorUsuarioId(googleid);
         if(in.isEmpty()){
             if(user.getBirthday()==null){
@@ -103,13 +119,17 @@ public class Evento_PublicacionBL {
             }else{
                 Long datetime = System.currentTimeMillis();
                 edad=((datetime)-(user.getBirthday().getTime()))/31557600000L;
-                if(edad<=30){
+                if(edad>= 16 && edad<=30){
                     aux=2;
                 }else{
-                    if(edad<=60){
+                    if(edad>=31 && edad<=60){
                         aux=3;
                     }else{
-                        aux=4;
+                        if (edad>= 61 && edad <=99) {
+                            aux=4;
+                        }else{
+                            aux=1;
+                        }
                     }
                 }
                 System.out.println("Edad: "+edad+ " group: "+ aux);
@@ -122,15 +142,30 @@ public class Evento_PublicacionBL {
                 try {
                     Long datetime = System.currentTimeMillis();
                     edad=((datetime)-(user.getBirthday().getTime()))/31557600000L;
-                    if(edad<=30){
+
+                    // if(edad<=30){
+                    //     aux=2;
+                    // }else{
+                    //     if(edad<=60){
+                    //         aux=3;
+                    //     }else{
+                    //         aux=4;
+                    //     }
+                    // }
+                    if(edad>= 16 && edad<=30){
                         aux=2;
                     }else{
-                        if(edad<=60){
+                        if(edad>=31 && edad<=60){
                             aux=3;
                         }else{
-                            aux=4;
+                            if (edad>= 61 && edad <=99) {
+                                aux=4;
+                            }else{
+                                aux=1;
+                            }
                         }
                     }
+
                     System.out.println("Edad: "+edad+ " group: "+ aux);
                     listaux= eventoPublicacionDAO.getRecomendaciones_V1(googleid,aux);
                     System.out.println("Usuario completo ");
