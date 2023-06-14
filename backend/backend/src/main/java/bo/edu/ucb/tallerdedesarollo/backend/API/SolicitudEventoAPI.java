@@ -7,7 +7,10 @@ import bo.edu.ucb.tallerdedesarollo.backend.DTO.ComentarioDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.EventoRecepcionDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoDTO;
 import bo.edu.ucb.tallerdedesarollo.backend.DTO.SolicitudEventoWPublicoDTO;
+
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -44,6 +47,7 @@ public class SolicitudEventoAPI {
     private SolicitudEventoBL solicitudEventoBL;
     private Evento_PublicacionBL evento_publicacionBL;
     private FileSystemStorageService fileSystemStorageService;
+    private Logger LOGGER = LoggerFactory.getLogger(SolicitudEventoAPI.class);
 
     
     public SolicitudEventoAPI(SolicitudEventoBL solicitudEventoBL, Evento_PublicacionBL evento_publicacionBL,
@@ -90,6 +94,7 @@ public class SolicitudEventoAPI {
         SolicitudEventoDTO se=new SolicitudEventoDTO(0,1,eventoRecepcionDTO.getTitulo(),0,id,timestamp,null);
        //solicitudEventoBL.nuevaSol(se);
         solicitudEventoBL.insertSoli(se);
+        LOGGER.info("La respuesta es: {}",eventoRecepcionDTO);
        //System.out.println(eventoRecepcionDTO.toString());
         return eventoRecepcionDTO;
     }
